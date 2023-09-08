@@ -1,0 +1,23 @@
+const DashboardCard = ({title, description}) => {
+    if (description.length>34){
+        description=description.substring(0,34)+"..."
+    }
+
+  return (
+    <div className='w-full'>
+        <div className=" relative w-full h-[12rem] rounded-lg bg-secondary border-2 border-[#c3c6ce] transition-all duration-500  hover:border-btlinks shadow-[0_0_4px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.28)] cursor-pointer overflow-hidden">
+            <div className="h-[6rem] w-full bg-tcolor">
+
+            </div>
+            <div className="card-details text-tcolor h-full overflow-y-scroll"> 
+                <p className="underline ml-4 text-xl hover:text-black cursor-pointer">{title}</p>
+                <p className="ml-4 text-lg">{description}</p>
+            </div>
+            {/* 27rem */}
+            {/* <button className="card-button translate-x-[-50%] translate-y-[125%] w-[60%] rounded-[1 rem] border-none bg-[#008bf8] text-white text-[1rem] px-[1rem] py-3 absolute left-[50%] bottom-0 opacity-0 transition-all duration-300 hover:bg-yellow-500 text-xl">Take up task</button> */}
+        </div>
+    </div>
+  )
+}
+
+export default DashboardCard

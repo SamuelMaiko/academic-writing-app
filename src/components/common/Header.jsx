@@ -6,24 +6,24 @@ const Header = () => {
   return (
     <div className='h-screen w-full'>
         <div className=' w-[90%] margin-auto h-full flex lg:static justify-center'>
-            <section className='z-[2] h-[28rem] lg:h-fit relative bg-[rgba(245,245,220,0.5)] lg:absolute pt-[4.8rem] md:pt-0 mt-[8.5rem] md:mt-[16rem] lg:mt-0 w-[95%] mx-auto md:w-[48rem] md:bg-transparent flex-wrap lg:flex-nowrap lg:m-0 lg:left-24 bottom-24 lg:bottom-52  lg:w-[45%]'>
-                <p className='text-[2.5rem] font-bold font-prompt'>
+            <section className='z-[2] h-[28rem] lg:h-fit relative bg-[rgba(245,245,220,0.5)] lg:absolute pt-[4.8rem] md:pt-0 mt-[8.5rem] md:mt-[16rem] lg:mt-0 w-[95%] mx-auto md:w-[48rem] md:bg-transparent flex-wrap lg:flex-nowrap lg:m-0 lg:left-24 bottom-24 lg:bottom-72  lg:w-[45%]'>
+                <p className='md:text-[2.5rem] text-[2rem] font-bold font-prompt'>
                     Welcome to Unknown writers self-Service Portal
                 </p>
-                <small className='text-lg leading-9'>
+                <small className='text-xl leading-9'>
                 Access our services easily and quickly. Create an account and get to enjoy Unknown writers online services.
                 </small>
-                <div className="ml-20 lg:ml-0">
-                    <button className='rounded-3xl lg:hidden px-5 py-3 mt-4 bg-btlinks text-white hover:bg-green-700'>
+                <div className="md:ml-20 lg:ml-0">
+                    <button className='rounded-3xl lg:hidden px-5 py-3 mt-4 bg-btlinks text-white text-xl hover:bg-green-700'>
                         Login
                     </button>
-                    <button className='ml-7 rounded-3xl px-5 py-3 mt-4 bg-btlinks text-white hover:bg-green-700'>
+                    <button className='md:ml-7 rounded-3xl px-5 py-3 mt-4 bg-btlinks text-white text-xl hover:bg-green-700'>
                         Create account
                     </button>
                 </div>
             </section>
 
-            <Div className="absolute   w-[28rem] h-[28rem] right-20 lg:right-24 top-36 rounded-full p-4  lg:inline-block ">
+            <Div className="absolute   w-[28rem] h-[28rem] right-20 lg:right-24 top-52 rounded-full p-4  lg:inline-block ">
                 
             </Div>
             

@@ -6,7 +6,7 @@ const SIGNUP_IMAGE=SignupImg
 const Signup = () => {
     const {show}=useMyCustomHook()
   return (
-    <div className='w-full h-screen font-prompt'>
+    <div className='w-full h-screen font-opensans'>
     <NavBar />
 
     <div className={`${show?"visible":"invisible opacity-0"} opacity-1 transition-all duration-500 absolute lg:hidden z-[4] bg-white right-0 left-0 bottom-0 top-[5rem]`}>
@@ -21,25 +21,25 @@ const Signup = () => {
         </section>
         <section className='lg:w-[50%] w-[95%] md:w-[80%] mx-auto lg:mx-0 h-full flex justify-center lg:mt-10 mt-4'>
                 <form className='w-[35rem] px-5'>
-                    <h1 className='text-center text-3xl font-prompt'>SignUp</h1>
+                    <h1 className='text-center text-4xl font-prompt'>SignUp</h1>
                     <div className='mb-3 mt-5'>
-                        <label className=' text-md '>Registration number <span className='text-red-600'>*</span></label>
-                        <input className='shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="regNo" placeholder='Enter Employee No.' ></input>
+                        <label className=' text-xl font-semibold'>Registration number <span className='text-red-600'>*</span></label>
+                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="regNo" placeholder='Enter Employee No.' ></input>
                     </div>
                     <div className='mb-3 mt-5'>
-                        <label className=' text-md '>Password <span className='text-red-600'>*</span></label>
-                        <input className='shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="password" placeholder='Enter Password' ></input>
+                        <label className=' text-xl font-semibold'>Password <span className='text-red-600'>*</span></label>
+                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="password" placeholder='Enter Password' ></input>
                     </div>
                     <div className='mb-3 mt-5'>
-                        <label className=' text-md '>Confirm Password <span className='text-red-600'>*</span></label>
-                        <input className='shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="confirmPassword" placeholder='Confirm Password' ></input>
+                        <label className=' text-xl font-semibold '>Confirm Password <span className='text-red-600'>*</span></label>
+                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="confirmPassword" placeholder='Confirm Password' ></input>
                         {/* <p className='text-sm mt-1'>Password is case sensitive</p> */}
                     </div>
                     <div className='pb-5'>
-                        <button className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  hover:bg-green-700 bg-btlinks mt-5 text-white rounded-lg py-2 '>SignUp</button>
+                        <button className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-2xl  hover:bg-green-700 bg-btlinks mt-5 text-white rounded-lg py-2 '>SignUp</button>
                     </div>
                     <div className='flex pl-4'>   
-                        <p className='text-md underline mr-4 ' href='#'>Already Have An Account? </p><a className='no-underline hover:text-blue-700' href="#">Login</a>
+                        <p className='text-lg underline mr-4 hover:text-blue-700 ' href='#'>Already Have An Account? </p><a className='no-underline hover:text-blue-700' href="#">Login</a>
                     </div>
                 </form>
         </section>

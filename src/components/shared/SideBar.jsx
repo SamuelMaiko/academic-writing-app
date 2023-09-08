@@ -10,9 +10,11 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import SidePanel from '../common/SidePanel';
 import { useState } from 'react';
+import { useMyCustomHook } from '../../context/MyContext'
 
 const SideBar = () => {
     const [expanded, setExpanded] = useState(false);
+    const {show, setShow}=useMyCustomHook()
 
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -20,8 +22,14 @@ const SideBar = () => {
   };
   return (
     <div>
-        <section className="w-[18rem] fixed h-full font-prompt bg-[#fff]">
-                <p className='w-full text-3xl px-8 font-semibold cursor-pointer mb-10 text-tcolor py-5'>Logo</p>      
+        <section className="w-[18rem] fixed z-20 h-full font-prompt bg-[#fff]">
+                <p className='w-full text-3xl px-8 font-semibold cursor-pointer mb-10 text-tcolor py-5'>Logo</p>  
+                {/* ///Close icon */}
+                <p onClick={()=>setShow(!show)} className='w-[3rem] absolute lg:hidden top-2 right-4 cursor-pointer rounded-full hover:bg-[rgba(0,0,0,0.06)] '>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="">
+                  <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                  </svg>
+                </p>    
 
                 <SidePanel icon={<BsSpeedometer2/>} text="Dashboard" />
 
@@ -63,7 +71,7 @@ const SideBar = () => {
                     </AccordionDetails>
                 </Accordion>
                 
-                <SidePanel icon={<GoHistory/>} text="History" />
+                {/* <SidePanel icon={<GoHistory/>} text="History" /> */}
 
                 <SidePanel icon={<RxExit/>} text="Log out" />
                 

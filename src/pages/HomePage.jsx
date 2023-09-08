@@ -7,10 +7,10 @@ const HomePage = () => {
   return (
     <div className='relative h-full w-full '>
         <NavBar />
-        <div className='h-[screen-5rem] '>
+        <div className='h-[screen-7rem] '>
         <Header /> 
         </div>
-        <div className={`${show?"visible":"invisible opacity-0"} opacity-1 transition-all duration-500 absolute lg:hidden z-[4] bg-white right-0 left-0 bottom-0 top-[5rem]`}>
+        <div className={`${show?"visible":"invisible opacity-0"} opacity-1 transition-all duration-500 absolute lg:hidden z-[4] bg-white right-0 left-0 bottom-0 top-[7rem]`}>
 
         </div>
     </div>
