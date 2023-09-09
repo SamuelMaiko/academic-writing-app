@@ -6,7 +6,7 @@ const AssignmentCard = () => {
   return (
     // 34rem
     <div>
-        <div className="card relative w-[100%] h-[23rem] rounded-lg bg-secondary border-2 border-[#c3c6ce] transition-all duration-500  hover:border-btlinks shadow-[0_0_4px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)]">
+        <div className="card relative w-[100%] h-[23rem] rounded-lg bg-secondary border-2 border-[#c3c6ce] transition-all duration-500  hover:border-btlinks shadow-[0_0_4px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)] cursor-pointer">
             <div className="card-details text-black h-full overflow-y-scroll"> 
                 <p className=" md:text-[1.5rem] text-[1.3rem] font-bold font-opensans text-tcolor"><span className="font-semibold text-black underline">Title:</span> Discuss the impact of Technology on education. Discuss the impact of Technology on education. </p>
                 <p className=" text-xl text-red-600 font-semibold"><span className="font-semibold text-black underline">Due date:</span> {DUE_DATE}</p>

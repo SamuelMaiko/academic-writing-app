@@ -26,7 +26,7 @@ const Login = () => {
                     <h1 className='text-center text-4xl font-prompt'>Login</h1>
                     <div className='mb-3 mt-5'>
                         <label className=' text-xl font-semibold'>Username <span className='text-red-600'>*</span></label>
-                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="username" value="Hi" name="username" placeholder='Enter Employee No.' ></input>
+                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="username" placeholder='Enter Employee No.' ></input>
                     </div>
                     <div className='mb-3 mt-5'>
                         <label className=' text-xl font-semibold'>Password <span className='text-red-600'>*</span></label>

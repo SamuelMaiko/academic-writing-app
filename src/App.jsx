@@ -7,6 +7,7 @@ import DashboardOverview from './components/common/DashboardOverview'
 import PropTypes from 'prop-types'
 import AdminDashboard from './components/admin/AdminDashboard'
 import WriterDashboard from './components/writer/WriterDashboard'
+import WorkOrderManagement from './components/admin/WorkOrderManagement'
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/dashboard-overview" element={<GeneralRoute><DashboardOverview /></GeneralRoute>}/>
         <Route path="/dashboard-overview/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/dashboard-overview/writer/dashboard" element={<WriterDashboard />} />
+        <Route path="/dashboard-overview/admin/dashboard/workorder" element={<WorkOrderManagement />} />
         <Route path="*" element={<h1>Page Not found!</h1>} />
       </Routes>
 

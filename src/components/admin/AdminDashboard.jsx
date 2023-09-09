@@ -25,7 +25,7 @@ const AdminDashboard = () => {
                     <TitleManager title="Dashboard"/>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-5">
                         <DashboardCard title="User Management" description="Create, deactivate and delete user accounts"/>
-                        <DashboardCard title="Content editing" description="Publish, edit and delete work"/>
+                        <DashboardCard title="Work Order Management" description="Publish, edit and delete work"/>
                         <DashboardCard title="Assignment Status" description="Check the progress of uptaken work"/>
                         <DashboardCard title="Statisics" description="Check no. of open assignments, total assignments in a week, no.of writers"/>
                         <DashboardCard title="User Management" description="Create, deactivate and delete user accounts"/>
