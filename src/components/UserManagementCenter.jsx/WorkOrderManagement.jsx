@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TableRow from "../common/TableRow"
 import TitleManager from "../shared/TitleManager"
 import {GoSearch} from 'react-icons/go'
 import Backdrop from '@mui/material/Backdrop';
@@ -7,10 +8,8 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 // import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import WorkTableHead from "../common/WorkTableHead";
-import WorkTableRow from "../common/WorkTableRow"
+import TableHead from "../common/WorkTableHead";
 import CreateWorkform from "../common/CreateWorkform";
-import AdminTitleManager from "./AdminTitleManager";
 
 const WorkOrderManagement = () => {
     const [open3, setOpen3] =useState(false);
@@ -21,7 +20,7 @@ const WorkOrderManagement = () => {
     <div className=" w-full h-full">
         <div className="w-[90%] mx-auto">
             <div>
-            <AdminTitleManager title="Work Order Management" />
+            <TitleManager title="Admin Dashboard: Work Order Management" />
             </div>
 
             <div className="flex pb-5 h-[5rem] justify-between items-center border-b-[rgba(0,0,0,0.14)] border-b-1">
@@ -56,19 +55,19 @@ const WorkOrderManagement = () => {
                 
                 
             </div>
-            <p className="text-2xl text-black font-opensans mb-7">{TASKS_COUNT} tasks</p>
+            <p className="text-2xl text-black font-opensans font-semibold mb-7">{TASKS_COUNT} in total.</p>
 
             <table className="w-full border-1">
-                <WorkTableHead />
+                <TableHead />
                 <tbody>
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                    <TableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
                 </tbody>          
             </table>
             

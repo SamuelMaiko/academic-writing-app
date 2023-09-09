@@ -22,13 +22,13 @@ const AdminDashboard = () => {
             <section className={`${show?" overflow-hidden":" "} remove-scroll lg:pl-[18rem] h-full overflow-y-scroll font-prompt`}>
                 
                 <div className="w-[90%] mx-auto">
-                    <TitleManager title="Dashboard"/>
+                    <TitleManager title="Admin Dashboard"/>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-5">
-                        <DashboardCard title="User Management" description="Create, deactivate and delete user accounts"/>
+                        <DashboardCard title="User Management Center" description="Create, delete and deactivate user accounts"/>
                         <DashboardCard title="Work Order Management" description="Publish, edit and delete work"/>
                         <DashboardCard title="Assignment Status" description="Check the progress of uptaken work"/>
                         <DashboardCard title="Statisics" description="Check no. of open assignments, total assignments in a week, no.of writers"/>
-                        <DashboardCard title="User Management" description="Create, deactivate and delete user accounts"/>
+                        {/* <DashboardCard title="User Management" description="Create, deactivate and delete user accounts"/> */}
                     </div>
                 
                 </div>

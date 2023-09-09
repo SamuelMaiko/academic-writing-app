@@ -14,7 +14,7 @@ const Signup = () => {
     </div>
     <div className='w-[90%] h-[screen-6rem] mx-auto flex justify-between'>
         <section className='relative w-[50%] hidden lg:flex'>
-            <SignupImage className='absolute w-[28rem] h-[28rem] left-2 top-8 rounded-full p-4 '>
+            <SignupImage className='absolute w-[28rem] h-[28rem] left-2 top-24 rounded-full p-4 '>
                 
             </SignupImage>
 

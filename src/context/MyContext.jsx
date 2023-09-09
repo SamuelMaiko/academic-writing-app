@@ -31,12 +31,13 @@ const MyContext = ({children}) => {
     }
   ]
   const CURRENT_USER="Admin"
+  const USER_TYPE="Admin" //gotten from form
   const DUE_DATE="21st Sep 2023 by 11:59 pm"
   const WORD_COUNT=1500
   const SPECIAL_REQUIREMENTS="There is a specific"
   const ASSIGNMENT_ID="23H"
   return (
-    <ThemeContext.Provider value={{ show, setShow,USER_TYPES,CURRENT_USER,DUE_DATE,WORD_COUNT, SPECIAL_REQUIREMENTS,ASSIGNMENT_ID}}>
+    <ThemeContext.Provider value={{ show, setShow,USER_TYPES,CURRENT_USER,DUE_DATE,WORD_COUNT, SPECIAL_REQUIREMENTS,ASSIGNMENT_ID, USER_TYPE}}>
       {children}
     </ThemeContext.Provider>
     
