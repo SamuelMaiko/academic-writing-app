@@ -5,6 +5,19 @@ import TitleManager from "../shared/TitleManager"
 
 const AdminDashboard = () => {
     const {show, setShow}=useMyCustomHook()
+
+    const WriterDashboardLinks=[
+        {
+            title:"Uptaken Work",
+            description: "View the list of work taken",
+            link:"/dashboard-overview/writer/dashboard/uptakenwork"
+        },
+        {
+            title:"Assigned Work",
+            description: "View the list of work assigned",
+            link:"/dashboard-overview/writer/dashboard/assignedwork"
+        }
+    ]
   return (
     <div className="w-full h-screen">
         <div className="relative">
@@ -16,7 +29,7 @@ const AdminDashboard = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="">
                 <path fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
                 </svg>
-
+ 
             </div>
 
             <section className={`${show?" overflow-hidden":" "} remove-scroll lg:pl-[18rem] h-full overflow-y-scroll font-prompt`}>
@@ -24,11 +37,16 @@ const AdminDashboard = () => {
                 <div className="w-[90%] mx-auto">
                     <TitleManager title="Dashboard"/>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-5">
-                        <DashboardCard title="Uptaken work" description="View the list of work taken"/>
-                        <DashboardCard title="History" description="View my history"/>
+                        {/* <DashboardCard title="" description=""/>
+                        <DashboardCard title="" description=""/> */}
                         {/* <DashboardCard title="Assignment Status" description="Check the progress of uptaken work"/>
                         <DashboardCard title="Statisics" description="Check no. of open assignments, total assignments in a week, no.of writers"/>
                         <DashboardCard title="User Management" description="Create, deactivate and delete user accounts"/> */}
+                        {
+                            WriterDashboardLinks.map((singleLink,index)=>{
+                                return <DashboardCard key={index} title={singleLink.title} description={singleLink.description} link={singleLink.link}/>
+                            })
+                        }
                     </div>
                 
                 </div>

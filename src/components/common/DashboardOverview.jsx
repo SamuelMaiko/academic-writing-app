@@ -5,14 +5,27 @@ import {MdNotifications} from 'react-icons/md'
 import { useMyCustomHook } from '../../context/MyContext'
 import AssignmentCard from '../shared/AssignmentCard'
 import SideBar from '../shared/SideBar'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
  
 const DashboardOverview = () => {
   
   const DATE_TODAY="Thursday, September 7, 2023"
-  const USER_NAME="John Doe"
-  const {CURRENT_USER,show, setShow}=useMyCustomHook()
+//   const USER_NAME=
+  const {LOGGEDIN_USER,USER_NAME,show, setShow}=useMyCustomHook()
+  const navigate=useNavigate()
+
+  useEffect(()=>{
+    if (LOGGEDIN_USER){
+        console.log("dashboard overview verified")
+    }
+    else{
+        navigate('/')
+    }
+    
+  })
     
   return (
     <div className="w-full h-full">
@@ -29,25 +42,25 @@ const DashboardOverview = () => {
             </div>
             
 
-            <section className={`${show?" overflow-hidden":" "} remove-scroll lg:pl-[18rem] h-full overflow-y-scroll font-prompt`}>
+            <section className={`${show?" overflow-hidden":" "} remove-scroll lg:pl-[16rem] h-full overflow-y-scroll font-prompt`}>
                 <div className='w-[95%] mx-auto'>
                     <div className='relative text-center pt-8 md:pt-4 border-b-1 border-b-[rgba(0,0,0,0.3)] h-[8rem] md:h-[6rem]'>
-                        <p className='md:text-2xl text-xl inline-block  mr-4'>Hello {USER_NAME}!</p>
-                        <p className='md:text-xl text-lg inline-block'>You are logged in as {CURRENT_USER}.</p>
-                        <p className='md:text-lg text-md'>{DATE_TODAY}</p>
+                        <p className='md:text-[1.1rem] text-xl inline-block  mr-4'>Hello {USER_NAME}!</p>
+                        <p className='md:text-[1.1rem] text-lg inline-block'>You are logged in as {LOGGEDIN_USER.role}.</p>
+                        <p className='md:text-[1rem] text-md'>{DATE_TODAY}</p>
                         <p className='absolute right-10 top-4'>
-                            <span className='relative text-4xl text-black'><MdNotifications/>
-                                <span className='absolute rounded-full h-[1.7rem] w-[1.7rem] bg-red-600 -top-[0.2rem] -right-[0.55rem] border-3 border-white text-white text-[1rem] flex  justify-center items-center'>0</span>
+                            <span className='relative text-3xl text-black'><MdNotifications/>
+                                <span className='absolute rounded-full h-[1.4rem] w-[1.4rem] bg-red-600 -top-[0.2rem] -right-[0.55rem] border-3 border-white text-white text-[1rem] flex  justify-center items-center'>0</span>
                             </span>
                         </p>
                     </div>
 
-                    <div className='bg-[rgba(128,0,0,0.07)] w-full h-[20rem] mt-8 rounded-xl '>
-                        <h1 className='md:text-[2.5rem] text-[2rem] text-center font-light font-prompt'>Announcements!</h1>
+                    <div className='bg-[rgba(128,0,0,0.03)] w-full h-[20rem] mt-8 rounded-xl '>
+                        <h1 className='md:text-[1.7rem] text-[1.5rem] text-center font-light font-prompt'>Announcements!</h1>
                     </div>
                     
                     <div className='flex items-center h-[5rem] mb-3 mt-3 border-t-1 border-b-1 border-b-[rgba(0,0,0,0.3)] border-t-[rgba(0,0,0,0.3)]'>
-                        <h1 className='md:text-[3rem] text-[2rem] font-light font-prompt'>Assignments</h1>
+                        <h1 className='md:text-[1.9rem] text-[2rem] font-light font-prompt'>Assignments</h1>
                     </div>
                     <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-7'>
                         <AssignmentCard />

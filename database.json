@@ -1,0 +1,22 @@
+{
+    "users":[
+        {
+            "registrationNumber":"JG234/2024",
+            "firstName":"Joe",
+            "lastName":"Goldberg",
+            "password": "joe234",
+            "email": "joe1234@gmail.com",
+            "phone": "0169788362",
+            "role": "Admin"
+        },
+        {
+            "registrationNumber":"SK234/2024",
+            "firstName":"Sarah",
+            "lastName":"Cameron",
+            "password": "sarah234",
+            "email": "sarah1234@gmail.com",
+            "phone": "0187363370",
+            "role": "Writer"
+        }
+    ]
+}

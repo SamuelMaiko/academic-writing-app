@@ -4,7 +4,18 @@ import NavBar from './NavBar'
 import { useMyCustomHook } from '../../context/MyContext'
 const SIGNUP_IMAGE=SignupImg
 const Signup = () => {
-    const {show}=useMyCustomHook()
+    const {show,navigate}=useMyCustomHook()
+
+    const SignUpUser=(e)=>{
+        e.preventDefault()
+        navigate('/login')
+    }
+
+    const TakeUserToLoginPage=(e)=>{
+        e.preventDefault()
+        navigate('/login')
+        e.target.reset()
+    }
   return (
     <div className='w-full h-screen font-opensans'>
     <NavBar />
@@ -20,26 +31,26 @@ const Signup = () => {
 
         </section>
         <section className='lg:w-[50%] w-[95%] md:w-[80%] mx-auto lg:mx-0 h-full flex justify-center lg:mt-10 mt-4'>
-                <form className='w-[35rem] px-5'>
-                    <h1 className='text-center text-4xl font-prompt'>SignUp</h1>
+                <form onSubmit={SignUpUser} className='w-[35rem] px-5'>
+                    <h1 className='text-center text-[2.3rem] font-prompt'>SignUp</h1>
                     <div className='mb-3 mt-5'>
-                        <label className=' text-xl font-semibold'>Registration number <span className='text-red-600'>*</span></label>
-                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="regNo" placeholder='Enter Employee No.' ></input>
+                        <label className=' text-[1rem] font-semibold'>Registration number <span className='text-red-600'>*</span></label>
+                        <input className='text-[1rem] shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="regNo" placeholder='Enter Employee No.' ></input>
                     </div>
                     <div className='mb-3 mt-5'>
-                        <label className=' text-xl font-semibold'>Password <span className='text-red-600'>*</span></label>
-                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="password" placeholder='Enter Password' ></input>
+                        <label className=' text-[1rem] font-semibold'>Password <span className='text-red-600'>*</span></label>
+                        <input className='text-[1rem] shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="Hi" name="password" placeholder='Enter Password' ></input>
                     </div>
                     <div className='mb-3 mt-5'>
-                        <label className=' text-xl font-semibold '>Confirm Password <span className='text-red-600'>*</span></label>
-                        <input className='text-xl shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="confirmPassword" placeholder='Confirm Password' ></input>
+                        <label className=' text-[1rem] font-semibold '>Confirm Password <span className='text-red-600'>*</span></label>
+                        <input className='text-[1rem] shadow-[0_0_4px_rgba(0,0,0,0.3)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="confirmPassword" placeholder='Confirm Password' ></input>
                         {/* <p className='text-sm mt-1'>Password is case sensitive</p> */}
                     </div>
                     <div className='pb-5'>
-                        <button className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-2xl  hover:bg-green-700 bg-btlinks mt-5 text-white rounded-lg py-2 '>SignUp</button>
+                        <button type="submit" className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  hover:bg-hover bg-chocolate mt-5 text-white rounded-lg py-2 '>SignUp</button>
                     </div>
                     <div className='flex pl-4'>   
-                        <p className='text-lg underline mr-4 hover:text-blue-700 ' href='#'>Already Have An Account? </p><a className='no-underline hover:text-blue-700' href="#">Login</a>
+                        <p className='text-[1rem]' href='#'>Already Have An Account? </p><a onClick={TakeUserToLoginPage} className='no-underline text-[1rem] ml-2 font-semibold hover:text-hover' href="#">Login</a>
                     </div>
                 </form>
         </section>

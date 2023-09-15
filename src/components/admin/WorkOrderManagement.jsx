@@ -26,11 +26,11 @@ const WorkOrderManagement = () => {
 
             <div className="flex pb-5 h-[5rem] justify-between items-center border-b-[rgba(0,0,0,0.14)] border-b-1">
                 <div className="relative flex-1 flex justify-center">
-                    <input className="h-[3.5rem] outline-none rounded-lg w-[70%] pl-14 text-lg shadow-[0_0_4px_rgba(0,0,0,0.7)] "  type="text" placeholder="Search work"></input>
+                    <input className="h-[2.9rem] outline-none rounded-lg w-[70%] pl-14 text-lg shadow-[0_0_4px_rgba(0,0,0,0.7)] "  type="text" placeholder="Search work"></input>
                     <span className="text-[1.7rem] absolute left-[14.6rem] top-[50%] translate-y-[-50%] "><GoSearch /></span>
                 </div>
                 <div className="w-fit">
-                    <button onClick={handleOpen3} className="bg-blue-500 hover:bg-blue-700 py-2 px-5 font-prompt text-xl rounded-lg text-white">Create work</button>
+                    <button onClick={handleOpen3} className="bg-chocolate hover:bg-hover py-2 px-5 font-opensans text-[1.1rem] rounded-lg text-white">Create work</button>
 
                 </div>
 
@@ -40,7 +40,7 @@ const WorkOrderManagement = () => {
 
           <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open3} onClose={handleClose3} closeaftertransitionslots={{ backdrop: Backdrop }} slotProps={{ backdrop: { timeout: 500, },}} >
         <Fade in={open3}>
-          <Box className="absolute top-[50%] rounded-lg left-[50%] translate-x-[-50%] translate-y-[-50%] bg-black w-[50rem]">
+          <Box className="absolute top-[50%] rounded-lg left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem]">
             <Typography  id="transition-modal-title" variant="h6" component="h2" className=''>
                 <CreateWorkform handleClose3={handleClose3} />
             </Typography>
@@ -56,7 +56,7 @@ const WorkOrderManagement = () => {
                 
                 
             </div>
-            <p className="text-2xl text-black font-opensans mb-7">{TASKS_COUNT} tasks</p>
+            <p className="text-[1.2rem] text-black font-opensans mb-7">{TASKS_COUNT} tasks</p>
 
             <table className="w-full border-1">
                 <WorkTableHead />

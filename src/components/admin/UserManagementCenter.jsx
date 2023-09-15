@@ -29,11 +29,11 @@ const UserManagementCenter = () => {
 
             <div className="flex pb-5 h-[5rem] justify-between items-center border-b-[rgba(0,0,0,0.14)] border-b-1">
                 <div className="relative flex-1 flex justify-center">
-                    <input className="h-[3.5rem] outline-none rounded-lg w-[70%] pl-14 text-lg shadow-[0_0_4px_rgba(0,0,0,0.7)] "  type="text" placeholder="Search user"></input>
+                    <input className="h-[2.9rem] outline-none rounded-lg w-[70%] pl-14 text-lg shadow-[0_0_4px_rgba(0,0,0,0.7)] "  type="text" placeholder="Search user"></input>
                     <span className="text-[1.7rem] absolute left-[14.6rem] top-[50%] translate-y-[-50%] "><GoSearch /></span>
                 </div>
                 <div className="w-fit">
-                    <button onClick={handleOpen4} className="bg-blue-500 hover:bg-blue-700 py-2 px-5 font-prompt text-xl rounded-lg text-white">Add User</button>
+                    <button onClick={handleOpen4} className="bg-chocolate hover:bg-hover py-2 px-5 font-prompt text-[1.1rem] rounded-lg text-white">Add User</button>
 
                 </div>
 
@@ -43,7 +43,7 @@ const UserManagementCenter = () => {
 
     <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open4} onClose={handleClose4} closeaftertransitionslots={{ backdrop: Backdrop }} slotProps={{ backdrop: { timeout: 500, },}} >
         <Fade in={open4}>
-          <Box className="absolute top-[50%] rounded-lg left-[50%] translate-x-[-50%] translate-y-[-50%] bg-black w-[50rem]">
+          <Box className="absolute top-[50%] rounded-lg left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem]">
             <Typography  id="transition-modal-title" variant="h6" component="h2" className=''>
                 <CreateUserForm handleClose4={handleClose4} />
             </Typography>
@@ -55,11 +55,11 @@ const UserManagementCenter = () => {
 {/* Modal end */}
 
 
-               
+                
                 
                 
             </div>
-            <p className="text-2xl text-black font-opensans mb-7">{TASKS_COUNT} users</p>
+            <p className="text-[1.2rem] text-black font-opensans mb-7">{TASKS_COUNT} users</p>
 
             <table className="w-full border-1">
                 <UserMngTableHead />

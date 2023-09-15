@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 import MyContext from './context/MyContext'
 import HomePage from './pages/HomePage'
 import Login from './components/common/Login'
@@ -10,14 +10,41 @@ import WriterDashboard from './components/writer/WriterDashboard'
 import WorkOrderManagement from './components/admin/WorkOrderManagement'
 import OpenCloseContext from './context/OpenCloseContext'
 import UserManagementCenter from './components/admin/UserManagementCenter'
+import AssignmentStatus from './pages/AssignmentStatus'
+import Statistics from './pages/Statistics'
+import WriterUptakenWork from './pages/WriterUptakenWork'
+import AssignedWork from './pages/AssignedWork'
 
 
 const App = () => {
   // const {USER_TYPES,CURRENT_USER }=useMyCustomHook()
+  // const navigate=useNavigate()
+
   const GeneralRoute=({children})=>{
-    return <div>{children}</div>
+    return (
+      <>
+      {children}
+      </>
+    )
   }
+
+  const WriterRoute=({children})=>{
+      return (
+        <>
+        {
+          children
+          
+        }
+        
+        </>
+      )
+    
+  }
+  
   GeneralRoute.propTypes={
+    children:PropTypes.node.isRequired
+  }
+  WriterRoute.propTypes={
     children:PropTypes.node.isRequired
   }
 
@@ -29,11 +56,15 @@ const App = () => {
           <Route path="/" element={<GeneralRoute><HomePage /></GeneralRoute>}/>
           <Route path="/login" element={<GeneralRoute><Login /></GeneralRoute>} />
           <Route path="/signup" element={<GeneralRoute><Signup /></GeneralRoute>}/>
-          <Route path="/dashboard-overview" element={<GeneralRoute><DashboardOverview /></GeneralRoute>}/>
-          <Route path="/dashboard-overview/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/dashboard-overview" element={<WriterRoute><DashboardOverview /></WriterRoute>}/>
           <Route path="/dashboard-overview/writer/dashboard" element={<WriterDashboard />} />
+          <Route path="/dashboard-overview/writer/dashboard/uptakenwork" element={<WriterUptakenWork />} />
+          <Route path="/dashboard-overview/writer/dashboard/assignedwork" element={<AssignedWork />} />
+          <Route path="/dashboard-overview/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/dashboard-overview/admin/dashboard/workorder" element={<WorkOrderManagement />} />
           <Route path="/dashboard-overview/admin/dashboard/usermanagement" element={<UserManagementCenter />} />
+          <Route path="/dashboard-overview/admin/dashboard/assignmentstatus" element={<AssignmentStatus />} />
+          <Route path="/dashboard-overview/admin/dashboard/statistics" element={<Statistics />} />
           <Route path="*" element={<h1>Page Not found!</h1>} />
         </Routes>
 
@@ -46,6 +77,8 @@ const App = () => {
     </OpenCloseContext>
   )
 }
+
+
 
 
 

@@ -9,7 +9,9 @@ export default {
     extend: {
       colors: {
         'primary':'#800020',
-        'secondary': '#f5f5dc',
+        'secondary': '#ffffff',
+        'chocolate': '#333333',
+        'hover':'#666666',
         'btlinks':'#799c79',
         "tcolor":'#333333',
         
