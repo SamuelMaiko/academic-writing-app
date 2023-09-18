@@ -1,41 +1,81 @@
-import React from 'react'
-import { AiOutlineFileText } from 'react-icons/ai'
+import React, { useState } from 'react'
+// import { AiOutlineFileText } from 'react-icons/ai'
 import { useMyCustomHook } from '../../context/MyContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
-const EditUserForm = ({handleClose10}) => { 
+const EditUserForm = ({handleClose10, ID, U_REGNO,U_FIRSTNAME, U_LASTNAME, U_PASSWORD, U_EMAIL, U_PHONE, U_ROLE}) => { 
   const {USER_TYPE}=useMyCustomHook()
+
+  const [regNo, setRegNo] = useState(U_REGNO)
+  const [firstName, setFirstName] = useState(U_FIRSTNAME)
+  const [lastName, setLastName] = useState(U_LASTNAME)
+  const [password, setPassword] = useState(U_PASSWORD)
+  const [email, setEmail] = useState(U_EMAIL)
+  const [phone, setPhone] = useState(U_PHONE)
+  const [role, setRole] = useState(U_ROLE)
+
+  const updateUserAccountDetails=(e)=>{
+    e.preventDefault()
+    const UPDATED_USER_DETAILS={
+        registrationNumber: regNo,
+        firstName,
+        lastName,
+        password,
+        email,
+        phone,
+        role,
+    }
+
+    axios.patch(`http://localhost:8001/users/${ID}`,UPDATED_USER_DETAILS)
+    .then(response=>{
+        toast.success('User Details updtaed successfully!')
+        // console.log(response.data)
+    })
+    .catch(error=>{
+        toast.error("Server Error (Editing user account)")
+        console.log(error.message)
+    })
+    
+
+  }
   return (
-    <form className='relative lg:w-[100%] w-full px-5 font-opensans text-white h-[40rem]'>
+    <form onSubmit={updateUserAccountDetails} className='relative lg:w-[100%] w-full px-5 font-opensans text-white h-[40rem]'>
         <h1 className='text-center text-[1.9rem] text-chocolate mt-3'>Edit User Details</h1>
         <div className='mt-2'>
             <label className=' text-[1rem] text-chocolate'>Reg No. </label>
-            <input className='text-[1rem] text-chocolate  border-1  bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="username" value="Hi" name="username" placeholder='Enter Employee No.' ></input>
+            <input onChange={(e)=>setRegNo(e.target.value)}className='text-[1rem] text-chocolate  border-1  bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="registrationNumber" value={regNo} name="username" placeholder='Enter Employee No.' ></input>
         </div>
-        <div className='flex justify-between'>
+        <div className='flex justify-between gap-x-1'>
+            <div className='mb-3 mt-2'>
+                <label className=' text-[1rem] text-chocolate'>First Name</label>
+                <input onChange={(e)=>setFirstName(e.target.value)}className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={firstName} name="firstName" placeholder='Enter First Name' ></input>
+            </div>
             
-        <div className='mb-3 mt-2'>
-            <label className=' text-[1rem] text-chocolate'>First Name</label>
-            <input className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="password" placeholder='Enter password' ></input>
-        </div>
-        
-        <div className='mt-2 mb-2'>
-            <div>
-            <label className='text-[1rem] text-chocolate'>Last Name </label>
-            <input className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" name="username" placeholder='Enter Employee No.' ></input>
-            </div>                        
-        </div>
+            <div className='mt-2 mb-2'>
+                <div>
+                <label className='text-[1rem] text-chocolate'>Last Name </label>
+                <input onChange={(e)=>setLastName(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={lastName} name="lastName" placeholder='Enter Last Name' ></input>
+                </div>                        
+            </div>
+            <div className='mt-2 mb-2'>
+                <div>
+                <label className='text-[1rem] text-chocolate'>Password </label>
+                <input onChange={(e)=>setPassword(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={password} name="password" placeholder='Enter Last Name' ></input>
+                </div>                        
+            </div>
         </div>
         <div className='mb-3 mt-2'>
             <label className=' text-[1rem] text-chocolate'>Email</label>
-            <input className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="There" name="text" placeholder='Enter password' ></input>
+            <input onChange={(e)=>setEmail(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={email} name="email" placeholder='Enter Email' ></input>
         </div>
         <div className='mb-3 mt-2'>
             <label className=' text-[1rem] text-chocolate'>Phone</label>
-            <input className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="There" name="password" placeholder='Enter password' ></input>
+            <input onChange={(e)=>setPhone(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={phone} name="phone" placeholder='Enter Phone' ></input>
         </div>
         <div className='mb-3 mt-2'>
             <label className=' text-[1rem] text-chocolate'>Role</label>
-            <select className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="input" name="password" placeholder='Enter password'>
+            <select onChange={(e)=>setRole(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="input" name="password" value={role} placeholder='Enter password'>
                 <option value="Admin">Admin</option>
                 <option value="Writer" >Writer</option>
             </select>
@@ -44,8 +84,9 @@ const EditUserForm = ({handleClose10}) => {
         </div>
         
         <div className='pb-5'>
-            <button onClick={handleClose10} className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  bg-chocolate hover:bg-hover mt-5 text-white rounded-lg py-2 '>Save changes</button>
+            <button type="submit" className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  bg-chocolate hover:bg-hover mt-5 text-white rounded-lg py-2 '>Save changes</button>
         </div>
+        {/* onClick={handleClose10} */}
 
         {/* <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open5} onClose={handleClose5} closeaftertransitionslots={{ backdrop: Backdrop }} slotProps={{ backdrop: { timeout: 500, },}} >
             <Fade in={open5}>

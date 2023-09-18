@@ -6,6 +6,7 @@ const WorkTableHead = () => {
             <th className="border-1 border-[rgba(0,0,0,0.2)]">Title</th>
             <th className="border-1 border-[rgba(0,0,0,0.2)]">Due date</th>
             <th className="border-1 border-[rgba(0,0,0,0.2)]">Word count</th>
+            <th className="border-1 border-[rgba(0,0,0,0.2)]">Writer</th>
             <th className="border-1 border-[rgba(0,0,0,0.2)]">Attachment</th>
             <th className="border-1 border-[rgba(0,0,0,0.2)]">Special requirement</th>
         </tr>

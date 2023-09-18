@@ -8,12 +8,14 @@ import PropTypes from 'prop-types'
 import AdminDashboard from './components/admin/AdminDashboard'
 import WriterDashboard from './components/writer/WriterDashboard'
 import WorkOrderManagement from './components/admin/WorkOrderManagement'
-import OpenCloseContext from './context/OpenCloseContext'
+import APIContext from './context/APIs'
 import UserManagementCenter from './components/admin/UserManagementCenter'
 import AssignmentStatus from './pages/AssignmentStatus'
 import Statistics from './pages/Statistics'
 import WriterUptakenWork from './pages/WriterUptakenWork'
 import AssignedWork from './pages/AssignedWork'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from "react-toastify"
 
 
 const App = () => {
@@ -50,8 +52,9 @@ const App = () => {
 
   
   return (
-    <OpenCloseContext>
+    <APIContext>
       <MyContext>
+      <ToastContainer position='bottom-right' theme='colored' hideProgressBar autoClose="2000" ></ToastContainer>
         <Routes>
           <Route path="/" element={<GeneralRoute><HomePage /></GeneralRoute>}/>
           <Route path="/login" element={<GeneralRoute><Login /></GeneralRoute>} />
@@ -74,7 +77,7 @@ const App = () => {
       
       </div>
       </MyContext>
-    </OpenCloseContext>
+    </APIContext>
   )
 }
 

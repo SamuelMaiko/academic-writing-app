@@ -1,6 +1,6 @@
-import { useState } from "react";
-import TableRow from "../common/WorkTableRow"
-import TitleManager from "../shared/TitleManager"
+import { useEffect, useState } from "react";
+// import TableRow from "../common/WorkTableRow"
+// import TitleManager from "../shared/TitleManager"
 import {GoSearch} from 'react-icons/go'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -8,18 +8,27 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 // import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import TableHead from "../common/WorkTableHead";
-import CreateWorkform from "../common/CreateWorkform";
+// import TableHead from "../common/WorkTableHead";
+// import CreateWorkform from "../common/CreateWorkform";
 import UserMngTableHead from "../common/UserMngTableHead";
 import UserMngTableRow from "../common/UserMngTableRow";
 import CreateUserForm from "./CreateUserForm";
 import AdminTitleManager from "./AdminTitleManager";
+import axios from "axios";
 
 const UserManagementCenter = () => {
     const [open4, setOpen4] =useState(false);
     const handleOpen4= () => setOpen4(true);
     const handleClose4 = () => setOpen4(false);
-    const TASKS_COUNT=20
+    const [allAccounts, setAllAccounts] = useState([])
+    const TASKS_COUNT=allAccounts.length
+
+    useEffect(()=>{
+        axios.get('http://localhost:8001/users')
+        .then(response=>{
+            setAllAccounts(response.data)
+        })
+    })
   return (
     <div className=" w-full h-full">
         <div className="w-[90%] mx-auto">
@@ -64,7 +73,11 @@ const UserManagementCenter = () => {
             <table className="w-full border-1">
                 <UserMngTableHead />
                 <tbody>
-                    <UserMngTableRow U_REGNO="20" U_FIRSTNAME="John" U_SECONDNAME="Doe" U_PASSWORD="john123" U_EMAIL="john123@gmail.com" U_ROLE="Admin" U_PHONE="072363261"  />
+                    {
+                        allAccounts.map((eachAccount, index)=>{
+                            return <UserMngTableRow key={index} ID={eachAccount.id} U_REGNO={eachAccount.registrationNumber} U_FIRSTNAME={eachAccount.firstName} U_LASTNAME={eachAccount.lastName} U_PASSWORD={eachAccount.password} U_EMAIL={eachAccount.email} U_ROLE={eachAccount.role} U_PHONE={eachAccount.phone}  />
+                        })
+                    }
                 </tbody>          
             </table>
             

@@ -7,6 +7,8 @@ import { AiOutlineFileText } from "react-icons/ai"
 import { Typography } from '@mui/material';
 import { useState } from 'react';
 import { useMyCustomHook } from '../../context/MyContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const CreateUserForm = ({handleClose4}) => {
     // const [open5, setOpen5] =useState(false);
@@ -14,40 +16,83 @@ const CreateUserForm = ({handleClose4}) => {
     // const handleClose5 = () => setOpen5(false);
 
     const {USER_TYPE}=useMyCustomHook()
+    const [regNo, setRegNo] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [role, setRole] = useState("Admin")
+
+    const createNewUser=(e)=>{
+        e.preventDefault()
+        const NEW_USER_DETAILS={
+            registrationNumber: regNo,
+            firstName,
+            lastName,
+            password,
+            email,
+            phone,
+            role,
+        }
+
+        const config={
+            headers:{
+                'Content-Type':'application/json',
+                Accept:'application/json'
+            }
+        }
+
+        axios.post('http://localhost:8001/users',NEW_USER_DETAILS,config)
+        .then(response=>{
+            toast.success('User account created successfully!')
+            console.log(response.data)
+        })
+        .catch(error=>{
+            toast.error("Server Error (Creating new user account)")
+            console.log(error.message)
+        })
+
+        e.target.reset()
+    }
 
   return (
-    <form className='relative lg:w-[100%] w-full font-opensans px-5 text-white h-[40rem]'> 
+    <form onSubmit={createNewUser} className='relative lg:w-[100%] w-full font-opensans px-5 text-white h-[40rem]'> 
         <h1 className='text-center text-[1.9rem] text-chocolate mt-3'>Create New User</h1>
         <div className='mt-2'>
-            <label className=' text-[1rem] text-chocolate'>Reg No. </label>
-            <input className='text-[1rem] border-1 text-chocolate bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="username" value="Hi" name="username" placeholder='Enter Employee No.' ></input>
+            <label className=' text-[1rem] text-chocolate' required>Reg No. </label>
+            <input onChange={(e)=>setRegNo(e.target.value)} className='text-[1rem] text-chocolate  border-1  bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={regNo} name="registrationNumber" placeholder='Enter Employee No.' required></input>
         </div>
-
-        <div className='flex justify-between'>
-        <div className='mb-3 mt-2'>
-            <label className=' text-[1rem] text-chocolate'>First Name</label>
-            <input className='text-[1rem] border-1 text-chocolate bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="password" placeholder='Enter password' ></input>
-        </div>
-        
-        <div className='mt-2 mb-2'>
-            <div>
-            <label className=' text-[1rem] text-chocolate'>Last Name </label>
-            <input className='text-[1rem] border-1 text-chocolate bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" name="username" placeholder='Enter Employee No.' ></input>
-            </div>                        
-        </div>
+        <div className='flex justify-between gap-x-1'>
+            <div className='mb-3 mt-2'>
+                <label className=' text-[1rem] text-chocolate' >First Name</label>
+                <input onChange={(e)=>setFirstName(e.target.value)}className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={firstName} name="firstName" placeholder='Enter First Name' required></input>
+            </div>
             
+            <div className='mt-2 mb-2'>
+                <div>
+                <label className='text-[1rem] text-chocolate'>Last Name </label>
+                <input onChange={(e)=>setLastName(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={lastName} name="lastName" placeholder='Enter Last Name' required></input>
+                </div>                        
+            </div>
+            <div className='mt-2 mb-2'>
+                <div>
+                <label className='text-[1rem] text-chocolate'>Password </label>
+                <input onChange={(e)=>setPassword(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={password} name="password" placeholder='Enter Password' required></input>
+                </div>                        
+            </div>
         </div>
         <div className='mb-3 mt-2'>
             <label className=' text-[1rem] text-chocolate'>Email</label>
-            <input className='text-[1rem] border-1 text-chocolate bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="There" name="text" placeholder='Enter password' ></input>
+            <input onChange={(e)=>setEmail(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={email} name="email" placeholder='Enter Email' required></input>
         </div>
         <div className='mb-3 mt-2'>
-            <label className='text-[1rem] text-chocolate'>Phone</label>
-            <input className='text-[1rem] border-1 text-chocolate bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value="There" name="password" placeholder='Enter password' ></input>
+            <label className=' text-[1rem] text-chocolate'>Phone</label>
+            <input onChange={(e)=>setPhone(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={phone} name="phone" placeholder='Enter Phone' ></input>
         </div>
         <div className='mb-3 mt-2'>
             <label className=' text-[1rem] text-chocolate'>Role</label>
-            <select className='text-[1rem] border-1 text-chocolate bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="input" name="password" placeholder='Enter password'>
+            <select onChange={(e)=>setRole(e.target.value)} className='text-[1rem] text-chocolate  border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="input" name="password" value={role} placeholder='Enter password'required>
                 <option value="Admin">Admin</option>
                 <option value="Writer" >Writer</option>
             </select>
@@ -56,9 +101,9 @@ const CreateUserForm = ({handleClose4}) => {
         </div>
         
         <div className='pb-5'>
-            <button onClick={handleClose4} className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  bg-chocolate hover:bg-hover mt-5 text-white rounded-lg py-2 '>Create user</button>
+            <button type="submit" className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  bg-chocolate hover:bg-hover mt-5 text-white rounded-lg py-2 '>Create user</button>
         </div>
-
+        {/* onClick={handleClose4} */}
         {/* <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open5} onClose={handleClose5} closeaftertransitionslots={{ backdrop: Backdrop }} slotProps={{ backdrop: { timeout: 500, },}} >
             <Fade in={open5}>
                 <Box className="absolute top-[50%] rounded-lg left-[50%] translate-x-[-50%] translate-y-[-50%] bg-black w-[50rem]">

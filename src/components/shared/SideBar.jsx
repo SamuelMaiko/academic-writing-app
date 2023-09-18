@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import SidePanel from '../common/SidePanel';
 import { useState } from 'react';
 import { useMyCustomHook } from '../../context/MyContext'
+import { toast } from 'react-toastify'
 
 const SideBar = () => {
     const [expanded, setExpanded] = useState(false);
@@ -37,7 +38,9 @@ const SideBar = () => {
   }
   const handleLogOut=(e)=>{
     e.preventDefault()
+    setShow(false)
     localStorage.clear()
+    toast.success('Logout successful. Thank you for using our service')
     navigate('/')
   }
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TitleManager from "../shared/TitleManager"
 import {GoSearch} from 'react-icons/go'
 import Backdrop from '@mui/material/Backdrop';
@@ -11,12 +11,18 @@ import WorkTableHead from "../common/WorkTableHead";
 import WorkTableRow from "../common/WorkTableRow"
 import CreateWorkform from "../common/CreateWorkform";
 import AdminTitleManager from "./AdminTitleManager";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useMyAPIcontext } from "../../context/APIs";
 
 const WorkOrderManagement = () => {
+    const {availableWork}=useMyAPIcontext()
     const [open3, setOpen3] =useState(false);
     const handleOpen3 = () => setOpen3(true);
     const handleClose3 = () => setOpen3(false);
-    const TASKS_COUNT=20
+    const TASKS_COUNT=availableWork.length
+
+    
   return (
     <div className=" w-full h-full">
         <div className="w-[90%] mx-auto">
@@ -61,14 +67,11 @@ const WorkOrderManagement = () => {
             <table className="w-full border-1">
                 <WorkTableHead />
                 <tbody>
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
-                    <WorkTableRow W_ID="1" W_TITLE="Impact of technology on education" W_DUEDATE="22nd September 2023" W_WORDCOUNT="2000" W_ATTACHMENT="none" W_SPECIAL="None" />
+                  {
+                    availableWork.map((eachWork, index)=>{
+                      return <WorkTableRow key={index} ID={eachWork.id} W_ID={eachWork.workID} W_TITLE={eachWork.title} W_DUEDATE={eachWork.dueDate} W_WORDCOUNT={eachWork.wordCount} W_WRITER={eachWork.assignedWriter} W_ATTACHMENT={eachWork.attachment} W_SPECIAL={eachWork.specialRequirement} />
+                    })
+                  }                    
                 </tbody>          
             </table>
             

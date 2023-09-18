@@ -7,6 +7,8 @@ import AssignmentCard from '../shared/AssignmentCard'
 import SideBar from '../shared/SideBar'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useMyAPIcontext } from '../../context/APIs'
 
 
  
@@ -15,6 +17,7 @@ const DashboardOverview = () => {
   const DATE_TODAY="Thursday, September 7, 2023"
 //   const USER_NAME=
   const {LOGGEDIN_USER,USER_NAME,show, setShow}=useMyCustomHook()
+  const {availableWork}=useMyAPIcontext()
   const navigate=useNavigate()
 
   useEffect(()=>{
@@ -24,8 +27,10 @@ const DashboardOverview = () => {
     else{
         navigate('/')
     }
-    
+   
   })
+
+  
     
   return (
     <div className="w-full h-full">
@@ -63,22 +68,12 @@ const DashboardOverview = () => {
                         <h1 className='md:text-[1.9rem] text-[2rem] font-light font-prompt'>Assignments</h1>
                     </div>
                     <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-7'>
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
-                        <AssignmentCard />
+                        {
+                            availableWork.length!==0?
+                            availableWork.map((singleWork,index)=>{
+                                return <AssignmentCard key={index} TITLE={singleWork.title} DUE_DATE={singleWork.dueDate} WORD_COUNT={singleWork.wordCount} SPECIAL_REQUIREMENTS={singleWork.specialRequirement} ASSIGNMENT_ID={singleWork.workID} />
+                            }):<h1 className='text-2xl font-opensans'>No available assignments!</h1>
+                        }
                     </div>
                     
                 </div>

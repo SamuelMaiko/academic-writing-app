@@ -13,7 +13,7 @@ import EditUserForm from '../admin/EditUserForm';
 import DeleteUserModal from '../admin/DeleteUserModal';
 import EditAdminRightsForm from '../admin/EditAdminrightsForm';
 
-const UserMngTableRow = ({U_REGNO,U_FIRSTNAME, U_SECONDNAME, U_PASSWORD, U_EMAIL, U_PHONE, U_ROLE}) => {
+const UserMngTableRow = ({ID, U_REGNO,U_FIRSTNAME, U_LASTNAME, U_PASSWORD, U_EMAIL, U_PHONE, U_ROLE}) => {
     const [open10, setOpen10] =useState(false);
     const [open11, setOpen11] =useState(false);
     const handleOpen10 = () => setOpen10(true);
@@ -33,7 +33,7 @@ const UserMngTableRow = ({U_REGNO,U_FIRSTNAME, U_SECONDNAME, U_PASSWORD, U_EMAIL
     <tr className="border-1 h-[3rem] text-[1rem] hover:shadow-[0_0_4px_rgba(0,0,0,0.2)] hover:bg-[rgba(0,0,0,0.04)] transition-all duration-500">
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_REGNO}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_FIRSTNAME}</td>
-        <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_SECONDNAME}</td>
+        <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_LASTNAME}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_PASSWORD}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_EMAIL}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{U_PHONE}</td>
@@ -78,7 +78,7 @@ const UserMngTableRow = ({U_REGNO,U_FIRSTNAME, U_SECONDNAME, U_PASSWORD, U_EMAIL
         <Fade in={open10}>
           <Box className="absolute rounded-lg top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem]">
             <Typography  id="transition-modal-title" variant="h6" component="h2" className=''>
-                <EditUserForm handleClose10={handleClose10} />
+                <EditUserForm handleClose10={handleClose10} ID={ID} U_REGNO={U_REGNO} U_FIRSTNAME={U_FIRSTNAME} U_LASTNAME={U_LASTNAME} U_PASSWORD={U_PASSWORD} U_EMAIL={U_EMAIL} U_ROLE={U_ROLE} U_PHONE={U_PHONE} />
             </Typography>
           </Box>
         </Fade>
@@ -99,7 +99,7 @@ const UserMngTableRow = ({U_REGNO,U_FIRSTNAME, U_SECONDNAME, U_PASSWORD, U_EMAIL
         <Fade in={open11}>
           <Box className="absolute text-white rounded-lg flex top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem] h-[12rem]">
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              <DeleteUserModal handleClose11={handleClose11}/>
+              <DeleteUserModal handleClose11={handleClose11} ID={ID}/>
             </Typography>
           </Box>
         </Fade>

@@ -1,18 +1,90 @@
 // import React from 'react'
 
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { AiOutlineFileText } from "react-icons/ai"
+import { toast } from "react-toastify"
+import { useMyAPIcontext } from "../../context/APIs"
 
 const CreateWorkform = ({handleClose3}) => {
+    const {WORK_API_URL}=useMyAPIcontext()
+    const [workID, setWorkID] = useState("")
+    const [title, setTitle] = useState("")
+    const [dueDate, setDueDate] = useState("")
+    const [wordCount, setWordCount] = useState("")
+    const [assignedWriter, setAssignedWriter] = useState("")
+    const [specialRequirement, setSpecialRequirement] = useState("")
+
+    useEffect(()=>{
+        generateUniqueID()
+    })
+
+    const generateRandomID=()=>{
+        // Generate a random letter (A-Z)
+        const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // 65 is the ASCII code for 'A'
+        // Generate a random 3-digit number
+        const randomNumber = Math.floor(100 + Math.random() * 900);
+        // Combine the letter and number
+        const randomID = randomLetter + randomNumber;
+        // const theRandomID=randomID
+        return randomID
+    }
+    const generateUniqueID=()=>{
+        axios.get(WORK_API_URL)
+        .then(response=>{
+            const ALL_IDS=response.data.map((each)=>each.workID)
+            
+            let uniqueID=generateRandomID()
+            while(ALL_IDS.includes(uniqueID)){
+                uniqueID=generateRandomID()
+            }
+
+            setWorkID(uniqueID)
+        })
+
+        .catch(error=>{
+            toast.error("Server Error (generating random ID)")
+            console.log(error.message)
+        })
+    }
+
+    const createNewWork=(e)=>{
+        e.preventDefault()
+        generateUniqueID()
+        
+        const NEW_WORK_DETAILS={
+            workID,
+            title,
+            dueDate,
+            wordCount,
+            assignedWriter,
+            specialRequirement
+        }
+        const config={
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }
+        axios.post(WORK_API_URL,NEW_WORK_DETAILS,config)
+        .then(response=>{
+            toast.success('Work added successfully!')
+        })
+        .catch(error=>{
+        toast.error("Server Error (creating work)")
+        console.log(error.message)
+    })
+        handleClose3()
+    } 
   return (
-    <form className='relative lg:w-[100%] w-full px-5 text-white  font-opensans'>
+    <form onSubmit={createNewWork} className='relative lg:w-[100%] w-full px-5 text-white  font-opensans'>
         <h1 className='text-center text-[1.9rem] mt-3 text-chocolate'>Create Work</h1>
         <div className='mt-2'>
             <label className=' text-[1rem] text-chocolate'>Title </label>
-            <input className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="username" value="Hi" name="username" placeholder='Enter Employee No.' ></input>
+            <input onChange={(e)=>setTitle(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" value={title} name="title" placeholder='Enter title' required></input>
         </div>
         <div className='mb-3 mt-2'>
             <label className='text-[1rem] text-chocolate'>Due Date</label>
-            <input className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="password" value="There" name="password" placeholder='Enter password' ></input>
+            <input onChange={(e)=>setDueDate(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="date" value={dueDate} name="dueDate" placeholder='Enter due date' required></input>
         </div>
 
         <div className="hover:bg-hover text-white md:p-1 p-1 flex items-center justify-center bg-chocolate w-20 rounded-[1.3rem] cursor-pointer"><p className="text-[1.15rem] mr-1"><AiOutlineFileText/></p> <p className="text-[1rem]">File</p></div>
@@ -20,13 +92,43 @@ const CreateWorkform = ({handleClose3}) => {
         <div className='mt-2 mb-2 flex justify-between'>
             <div>
             <label className=' text-[1rem] text-chocolate'>Word Count </label>
-            <input className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" name="username" placeholder='Enter Employee No.' ></input>
+            <input onChange={(e)=>setWordCount(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' value={wordCount} type="text" name="wordCount" placeholder='Enter word count' required></input>
             </div>                        
         
             <div>
             <label className=' text-[1rem] text-chocolate'>Assign </label>
-            <select className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' type="text" name="username" placeholder='Enter Employee No.' >
+            <select onChange={(e)=>setAssignedWriter(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[3rem] pl-3 w-full rounded-lg' value={assignedWriter} type="text" name="username" placeholder='Enter writer' >
                 <option value="None">None</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option> 
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
+                <option value="John">John</option>
+                <option>Doe</option>
+                <option>Jane Doe</option>
                 <option value="John">John</option>
                 <option>Doe</option>
                 <option>Jane Doe</option>
@@ -37,10 +139,11 @@ const CreateWorkform = ({handleClose3}) => {
         
         <div className='mb-2'>
             <label className='text-[1rem] text-chocolate'>Special requirement </label>
-            <textarea className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[5rem] pl-3 w-full rounded-lg' type="text" name="username" placeholder='Enter Employee No.' ></textarea>
+            <textarea onChange={(e)=>setSpecialRequirement(e.target.value)} className='text-[1rem] text-chocolate border-1 bg-secondary border-[rgba(0,0,0,0.15)] mt-2 outline-none h-[5rem] pl-3 w-full rounded-lg' value={specialRequirement} type="text" name="specialRequirement" placeholder='Enter special requirement' ></textarea>
         </div>
         <div className='pb-5'>
-            <button onClick={handleClose3} className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  bg-chocolate hover:bg-hover mt-5 text-white rounded-lg py-2 '>Create work</button>
+            <button type="submit" className='shadow-[0_0_4px_rgba(0,0,0,0.15)] w-full text-center text-xl  bg-chocolate hover:bg-hover mt-5 text-white rounded-lg py-2 '>Create work</button>
+            {/* onClick={handleClose3} */}
         </div> 
 
         <div onClick={handleClose3} className='absolute w-11 h-5 top-2 right-4 rounded-full text-chocolate hover:text-hover cursor-pointer'>

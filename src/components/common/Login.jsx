@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import { useMyCustomHook } from '../../context/MyContext'
 import * as React from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 const LOWER_IMAGE=LowerImg
 
 const Login = () => {
@@ -30,21 +31,22 @@ const Login = () => {
 
             if (user){
                 localStorage.setItem('LOGGEDIN_USER',JSON.stringify(user))
+                toast.success('Welcome back! You have successfully logged in.')
                 navigate('/dashboard-overview')
                 // alert(JSON.parse(localStorage.getItem('LOGGEDIN_USER')))
             }
             else{
-                alert('input valid credentials!')
+                toast.error('Login failed. Please check your username and password.')
             }
         })
         .catch(error=>{
-            alert("Error with login!")
+            toast.error("Server Error (Login)")
             console.log(error.message)
         })
 
         e.target.reset()
     }
-    
+
     const takeUserToSignUpPage=(e)=>{
         e.preventDefault()
         navigate('/signup')

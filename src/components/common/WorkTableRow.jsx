@@ -20,7 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 // import Typography from '@mui/material/Typography';
 
 
-const WorkTableRow = ({W_ID,W_TITLE,W_DUEDATE,W_WORDCOUNT,W_ATTACHMENT,W_SPECIAL}) => {
+const WorkTableRow = ({ID,W_ID,W_TITLE,W_DUEDATE,W_WORDCOUNT,W_WRITER,W_ATTACHMENT,W_SPECIAL}) => {
     const [open, setOpen] =useState(false);
     const [open2, setOpen2] =useState(false);
     const handleOpen = () => setOpen(true);
@@ -43,6 +43,7 @@ const WorkTableRow = ({W_ID,W_TITLE,W_DUEDATE,W_WORDCOUNT,W_ATTACHMENT,W_SPECIAL
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_TITLE}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_DUEDATE}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_WORDCOUNT}</td>
+        <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_WRITER}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_ATTACHMENT}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_SPECIAL}</td>
         
@@ -62,7 +63,7 @@ const WorkTableRow = ({W_ID,W_TITLE,W_DUEDATE,W_WORDCOUNT,W_ATTACHMENT,W_SPECIAL
         <Fade in={open}>
           <Box className="absolute rounded-lg top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem]">
             <Typography  id="transition-modal-title" variant="h6" component="h2" className=''>
-                <EditWorkForm handleClose={handleClose} />
+                <EditWorkForm handleClose={handleClose} ID={ID} W_TITLE={W_TITLE} W_DUEDATE={W_DUEDATE} W_WORDCOUNT={W_WORDCOUNT} W_WRITER={W_WRITER} W_SPECIAL={W_SPECIAL} />
             </Typography>
           </Box>
         </Fade>
@@ -83,7 +84,7 @@ const WorkTableRow = ({W_ID,W_TITLE,W_DUEDATE,W_WORDCOUNT,W_ATTACHMENT,W_SPECIAL
         <Fade in={open2}>
           <Box className="absolute text-white rounded-lg flex top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem] h-[12rem]">
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              <DeleteWorkModal handleClose2={handleClose2}/>
+              <DeleteWorkModal handleClose2={handleClose2} ID={ID}/>
             </Typography>
           </Box>
         </Fade>

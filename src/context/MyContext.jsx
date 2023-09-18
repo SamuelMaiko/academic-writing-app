@@ -45,6 +45,7 @@ const MyContext = ({children}) => {
   const SPECIAL_REQUIREMENTS="There is a specific"
   const ASSIGNMENT_ID="23H"
   const navigate=useNavigate()
+  
   // const ASSIGNMENT_STATUS="Done"
   return (
     <ThemeContext.Provider value={{ show, setShow,DUE_DATE,WORD_COUNT, SPECIAL_REQUIREMENTS,ASSIGNMENT_ID,navigate,LOGGEDIN_USER, USER_NAME}}>
