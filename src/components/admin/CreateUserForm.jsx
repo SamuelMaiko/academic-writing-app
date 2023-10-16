@@ -9,12 +9,13 @@ import { useState } from 'react';
 import { useMyCustomHook } from '../../context/MyContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useMyAPIcontext } from "../../context/APIs";
 
 const CreateUserForm = ({handleClose4}) => {
     // const [open5, setOpen5] =useState(false);
     // const handleOpen5= () => setOpen5(true);
     // const handleClose5 = () => setOpen5(false);
-
+    const {allAccounts,setAllAccounts}=useMyAPIcontext()
     const {USER_TYPE}=useMyCustomHook()
     const [regNo, setRegNo] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -46,6 +47,8 @@ const CreateUserForm = ({handleClose4}) => {
         axios.post('http://localhost:8001/users',NEW_USER_DETAILS,config)
         .then(response=>{
             toast.success('User account created successfully!')
+            const newAccounts=[...allAccounts,NEW_USER_DETAILS]
+            setAllAccounts(newAccounts)
             console.log(response.data)
         })
         .catch(error=>{

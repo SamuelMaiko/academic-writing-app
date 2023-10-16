@@ -99,7 +99,7 @@ const UserMngTableRow = ({ID, U_REGNO,U_FIRSTNAME, U_LASTNAME, U_PASSWORD, U_EMA
         <Fade in={open11}>
           <Box className="absolute text-white rounded-lg flex top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem] h-[12rem]">
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              <DeleteUserModal handleClose11={handleClose11} ID={ID}/>
+              <DeleteUserModal handleClose11={handleClose11} ID={ID} />
             </Typography>
           </Box>
         </Fade>

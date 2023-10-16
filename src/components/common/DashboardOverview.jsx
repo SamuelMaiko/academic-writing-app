@@ -5,20 +5,24 @@ import {MdNotifications} from 'react-icons/md'
 import { useMyCustomHook } from '../../context/MyContext'
 import AssignmentCard from '../shared/AssignmentCard'
 import SideBar from '../shared/SideBar'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { useMyAPIcontext } from '../../context/APIs'
+import axios from 'axios'
+import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
 
 
  
 const DashboardOverview = () => {
+  const [availableWork, onSetAvailableWork] = useState([])
   
   const DATE_TODAY="Thursday, September 7, 2023"
 //   const USER_NAME=
-  const {LOGGEDIN_USER,USER_NAME,show, setShow}=useMyCustomHook()
-  const {availableWork}=useMyAPIcontext()
+  const {LOGGEDIN_USER,USER_NAME,show, setShow}=useMyCustomHook() 
+//   const {availableWork}=useMyAPIcontext()
+
   const navigate=useNavigate()
+  const {BASE_URL}=useMyBaseAPIContext()
 
   useEffect(()=>{
     if (LOGGEDIN_USER){
@@ -27,8 +31,14 @@ const DashboardOverview = () => {
     else{
         navigate('/')
     }
+    // _________________________________________________________fetching unassigned assignments_________________
+
+    axios.get(`${BASE_URL}/unassigned_assignments`)
+    .then(response=>{
+        onSetAvailableWork(response.data)
+    })
    
-  })
+  },[])
 
   
     
@@ -71,7 +81,7 @@ const DashboardOverview = () => {
                         {
                             availableWork.length!==0?
                             availableWork.map((singleWork,index)=>{
-                                return <AssignmentCard key={index} TITLE={singleWork.title} DUE_DATE={singleWork.dueDate} WORD_COUNT={singleWork.wordCount} SPECIAL_REQUIREMENTS={singleWork.specialRequirement} ASSIGNMENT_ID={singleWork.workID} />
+                                return <AssignmentCard key={index} TITLE={singleWork.title} DUE_DATE={singleWork.deadline} WORD_COUNT={singleWork.word_count} SPECIAL_REQUIREMENTS={singleWork.additional_info} ASSIGNMENT_ID={singleWork.assignment_id} />
                             }):<h1 className='text-2xl font-opensans'>No available assignments!</h1>
                         }
                     </div>

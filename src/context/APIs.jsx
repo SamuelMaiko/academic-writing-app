@@ -15,10 +15,12 @@ const APIContext = ({children}) => {
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false);
     
-    const [availableWork, setAvailableWork] = useState([])
+    const [availableWork, onSetAvailableWork] = useState([])
+    const [allAccounts, onSetAllAccounts] = useState([])
 
   const USERS_API_URL=''
-  const WORK_API_URL='http://localhost:8001/work'
+  const WORK_API_URL='http://localhost:8001/work' 
+ 
 
   useEffect(()=>{
     axios.get('http://localhost:8001/work')
@@ -29,11 +31,27 @@ const APIContext = ({children}) => {
       toast.error("Server Error (Getting work)")
       console.log(error.message)
   })
-  })
+  },[ ])
+
+  
+
+  useEffect(()=>{
+    axios.get('http://localhost:8001/users')
+    .then(response=>{
+        setAllAccounts(response.data)
+    })
+},[])
+
+  const setAvailableWork=(newWork)=>{
+    onSetAvailableWork(newWork)
+  }
+  const setAllAccounts=(newAccount)=>{
+    onSetAllAccounts(newAccount)
+}
 
 
   return (
-    <APIs.Provider value={{open,open2, handleOpen, handleClose, handleOpen2, handleClose2, USERS_API_URL, WORK_API_URL,availableWork}}>
+    <APIs.Provider value={{open,open2, handleOpen, handleClose, handleOpen2, handleClose2, USERS_API_URL, WORK_API_URL,availableWork,setAvailableWork,allAccounts,setAllAccounts}}>
     {children}
     </APIs.Provider>
   )

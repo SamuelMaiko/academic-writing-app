@@ -34,7 +34,7 @@ const MyContext = ({children}) => {
   //   }
   // ]
 
-  const LOGGEDIN_USER=JSON.parse(localStorage.getItem('LOGGEDIN_USER'))
+  const LOGGEDIN_USER={role:"Admin"}
   const USER_NAME=LOGGEDIN_USER?`${LOGGEDIN_USER.firstName} ${LOGGEDIN_USER.lastName}`:undefined;
   // const updateLoggedInUser=(newValue)=>{
   //   localStorage

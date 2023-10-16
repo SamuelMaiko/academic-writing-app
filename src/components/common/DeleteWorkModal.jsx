@@ -3,12 +3,18 @@ import { useMyAPIcontext } from "../../context/APIs"
 import { toast } from "react-toastify"
 
 const DeleteWorkModal = ({handleClose2,ID}) => {
-  const {WORK_API_URL}=useMyAPIcontext()
+  const {WORK_API_URL,availableWork,setAvailableWork}=useMyAPIcontext()
 
   const deleteWork=(e)=>{
     e.preventDefault()
     axios.delete(`${WORK_API_URL}/${ID}`)
-    handleClose2()
+
+    const remainingWork=availableWork.filter(each_work=>{
+      return each_work.id!==ID
+    })
+    setAvailableWork(remainingWork)
+    
+    handleClose2() 
     toast.success('Work deleted successfully!')
   }
 

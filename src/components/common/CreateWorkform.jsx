@@ -5,15 +5,18 @@ import { useEffect, useState } from "react"
 import { AiOutlineFileText } from "react-icons/ai"
 import { toast } from "react-toastify"
 import { useMyAPIcontext } from "../../context/APIs"
+import { useMyBaseAPIContext } from "../../context/BaseAPIContext"
 
 const CreateWorkform = ({handleClose3}) => {
     const {WORK_API_URL}=useMyAPIcontext()
+    // _________________________________
     const [workID, setWorkID] = useState("")
     const [title, setTitle] = useState("")
     const [dueDate, setDueDate] = useState("")
     const [wordCount, setWordCount] = useState("")
     const [assignedWriter, setAssignedWriter] = useState("")
     const [specialRequirement, setSpecialRequirement] = useState("")
+    const {BASE_URL}=useMyBaseAPIContext()
 
     useEffect(()=>{
         generateUniqueID()
@@ -30,11 +33,12 @@ const CreateWorkform = ({handleClose3}) => {
         return randomID
     }
     const generateUniqueID=()=>{
-        axios.get(WORK_API_URL)
+        axios.get(`${BASE_URL}/all_assignment_ids`)
         .then(response=>{
-            const ALL_IDS=response.data.map((each)=>each.workID)
+            const ALL_IDS=response.data
             
             let uniqueID=generateRandomID()
+
             while(ALL_IDS.includes(uniqueID)){
                 uniqueID=generateRandomID()
             }
@@ -53,21 +57,26 @@ const CreateWorkform = ({handleClose3}) => {
         generateUniqueID()
         
         const NEW_WORK_DETAILS={
-            workID,
+            assignment_id:workID,
             title,
-            dueDate,
-            wordCount,
-            assignedWriter,
-            specialRequirement
+            deadline:dueDate,
+            word_count:wordCount,
+            assigned_writer:null,
+            additional_info:specialRequirement,
+            author_id:1
         }
-        const config={
-            headers:{
+        // const config={
+        //     headers:{
+        //         'Content-Type':'application/json'
+        //     }
+        // }
+        const headers={
                 'Content-Type':'application/json'
             }
-        }
-        axios.post(WORK_API_URL,NEW_WORK_DETAILS,config)
+        axios.post(`${BASE_URL}/assignments`,NEW_WORK_DETAILS,{headers})
         .then(response=>{
             toast.success('Work added successfully!')
+            console.log(response.data)
         })
         .catch(error=>{
         toast.error("Server Error (creating work)")

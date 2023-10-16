@@ -1,12 +1,19 @@
 import axios from "axios"
 import { toast } from "react-toastify"
+import { useMyAPIcontext } from "../../context/APIs";
 
 const DeleteUserModal = ({handleClose11, ID}) => {
+  const {allAccounts,setAllAccounts}=useMyAPIcontext()
+
   const deleteUserAccount=(e)=>{
     e.preventDefault()
     axios.delete(`http://localhost:8001/users/${ID}`)
     .then(response=>{
-      toast.success('User account deleted successfully!')      
+      toast.success('User account deleted successfully!')
+      const remainingWork=allAccounts.filter(eachAccount=>{
+        return eachAccount.id!==ID
+      })
+      setAllAccounts(remainingWork)    
     })
     .catch(error=>{
       toast.error("Server Error (Deleting user account)")

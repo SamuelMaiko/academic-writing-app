@@ -6,42 +6,57 @@ import { useMyCustomHook } from '../../context/MyContext'
 import * as React from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
 const LOWER_IMAGE=LowerImg
 
 const Login = () => {
     const [username, setUsername] = React.useState("")
     const [password, setPassword] = React.useState("")
     const {show,navigate}=useMyCustomHook()
+    const {BASE_URL,TOKEN,setTOKEN}=useMyBaseAPIContext()
 
     const LogUserIn=(e)=>{
         e.preventDefault()
         // alert("Hi")
         const LOGIN_DETAILS={
-            registrationNumber:username,
-            password
+            work_id:username,
+            password:password
+        }
+        const headers={
+            'Content-Type':'application/json'
         }
 
-        axios.get('http://localhost:8001/users')
+        // _____________________LOGIN POSTING
+        axios.post(`${BASE_URL}/login`,LOGIN_DETAILS,{headers})
         .then(response=>{
-            // console.log(response.data)
-            const serverData=response.data
-            const user=serverData.find(eachUser=>{
-                return eachUser.registrationNumber===LOGIN_DETAILS.registrationNumber&& eachUser.password===LOGIN_DETAILS.password
-            });
-
-            if (user){
-                localStorage.setItem('LOGGEDIN_USER',JSON.stringify(user))
-                toast.success('Welcome back! You have successfully logged in.')
-                navigate('/dashboard-overview')
-                // alert(JSON.parse(localStorage.getItem('LOGGEDIN_USER')))
-            }
-            else{
-                toast.error('Login failed. Please check your username and password.')
-            }
+            // setTOKEN(response.data.access_token)
+            localStorage.setItem("TOKEN",response.data.access_token)
+            
+            console.log(response.data)
+            toast.success('Welcome back! You have successfully logged in.')
+            navigate('/dashboard-overview')
         })
+        // axios.get('http://localhost:8001/users')
+        // .then(response=>{
+        //     // console.log(response.data)
+        //     const serverData=response.data
+        //     const user=serverData.find(eachUser=>{
+        //         return eachUser.registrationNumber===LOGIN_DETAILS.registrationNumber&& eachUser.password===LOGIN_DETAILS.password
+        //     });
+
+        //     if (user){
+        //         localStorage.setItem('LOGGEDIN_USER',JSON.stringify(user))
+        //         toast.success('Welcome back! You have successfully logged in.')
+        //         navigate('/dashboard-overview')
+        //         // alert(JSON.parse(localStorage.getItem('LOGGEDIN_USER')))
+        //     }
+        //     else{
+        //         toast.error('Login failed. Please check your username and password.')
+        //     }
+        // })
         .catch(error=>{
             toast.error("Server Error (Login)")
-            console.log(error.message)
+            console.log(error)
         })
 
         e.target.reset()

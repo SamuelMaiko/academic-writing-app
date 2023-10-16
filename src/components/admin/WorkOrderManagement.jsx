@@ -14,14 +14,23 @@ import AdminTitleManager from "./AdminTitleManager";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useMyAPIcontext } from "../../context/APIs";
+import { useMyBaseAPIContext } from "../../context/BaseAPIContext";
 
 const WorkOrderManagement = () => {
-    const {availableWork}=useMyAPIcontext()
+    // const {availableWork}=useMyAPIcontext()
     const [open3, setOpen3] =useState(false);
     const handleOpen3 = () => setOpen3(true);
     const handleClose3 = () => setOpen3(false);
+    
+    const [availableWork, setAvailableWork] = useState([])
     const TASKS_COUNT=availableWork.length
+    const {BASE_URL}=useMyBaseAPIContext()
 
+    useEffect(()=>{
+      axios.get(`${BASE_URL}/assignments`)
+      .then(response=>setAvailableWork(response.data))
+
+    },[])
     
   return (
     <div className=" w-full h-full">
@@ -69,7 +78,7 @@ const WorkOrderManagement = () => {
                 <tbody>
                   {
                     availableWork.map((eachWork, index)=>{
-                      return <WorkTableRow key={index} ID={eachWork.id} W_ID={eachWork.workID} W_TITLE={eachWork.title} W_DUEDATE={eachWork.dueDate} W_WORDCOUNT={eachWork.wordCount} W_WRITER={eachWork.assignedWriter} W_ATTACHMENT={eachWork.attachment} W_SPECIAL={eachWork.specialRequirement} />
+                      return <WorkTableRow key={index} ID={eachWork.id} W_ID={eachWork.assignment_id} W_TITLE={eachWork.title} W_DUEDATE={eachWork.deadline} W_WORDCOUNT={eachWork.word_count} W_WRITER={eachWork.assigned_writer.firstname} W_ATTACHMENT={eachWork.file_url} W_SPECIAL={eachWork.additional_info} />
                     })
                   }                    
                 </tbody>          

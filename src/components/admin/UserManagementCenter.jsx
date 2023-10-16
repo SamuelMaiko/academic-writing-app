@@ -14,21 +14,27 @@ import UserMngTableHead from "../common/UserMngTableHead";
 import UserMngTableRow from "../common/UserMngTableRow";
 import CreateUserForm from "./CreateUserForm";
 import AdminTitleManager from "./AdminTitleManager";
-import axios from "axios";
+import { useMyAPIcontext } from "../../context/APIs";
+// import axios from "axios"; 
 
 const UserManagementCenter = () => {
     const [open4, setOpen4] =useState(false);
     const handleOpen4= () => setOpen4(true);
     const handleClose4 = () => setOpen4(false);
-    const [allAccounts, setAllAccounts] = useState([])
+    // const [allAccounts, setAllAccounts] = useState([])
+    const {allAccounts,setAllAccounts}=useMyAPIcontext()
     const TASKS_COUNT=allAccounts.length
 
-    useEffect(()=>{
-        axios.get('http://localhost:8001/users')
-        .then(response=>{
-            setAllAccounts(response.data)
-        })
-    })
+    // useEffect(()=>{
+    //     axios.get('http://localhost:8001/users')
+    //     .then(response=>{
+    //         setAllAccounts(response.data)
+    //     })
+    // },[])
+
+    // const onSetAllAccounts=(newAccount)=>{
+    //     setAllAccounts(newAccount)
+    // }
   return (
     <div className=" w-full h-full">
         <div className="w-[90%] mx-auto">

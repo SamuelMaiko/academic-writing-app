@@ -16,6 +16,7 @@ import WriterUptakenWork from './pages/WriterUptakenWork'
 import AssignedWork from './pages/AssignedWork'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from "react-toastify"
+import BaseAPIContext from './context/BaseAPIContext'
 
 
 const App = () => {
@@ -52,32 +53,34 @@ const App = () => {
 
   
   return (
-    <APIContext>
-      <MyContext>
-      <ToastContainer position='bottom-right' theme='colored' hideProgressBar autoClose="2000" ></ToastContainer>
-        <Routes>
-          <Route path="/" element={<GeneralRoute><HomePage /></GeneralRoute>}/>
-          <Route path="/login" element={<GeneralRoute><Login /></GeneralRoute>} />
-          <Route path="/signup" element={<GeneralRoute><Signup /></GeneralRoute>}/>
-          <Route path="/dashboard-overview" element={<WriterRoute><DashboardOverview /></WriterRoute>}/>
-          <Route path="/dashboard-overview/writer/dashboard" element={<WriterDashboard />} />
-          <Route path="/dashboard-overview/writer/dashboard/uptakenwork" element={<WriterUptakenWork />} />
-          <Route path="/dashboard-overview/writer/dashboard/assignedwork" element={<AssignedWork />} />
-          <Route path="/dashboard-overview/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/dashboard-overview/admin/dashboard/workorder" element={<WorkOrderManagement />} />
-          <Route path="/dashboard-overview/admin/dashboard/usermanagement" element={<UserManagementCenter />} />
-          <Route path="/dashboard-overview/admin/dashboard/assignmentstatus" element={<AssignmentStatus />} />
-          <Route path="/dashboard-overview/admin/dashboard/statistics" element={<Statistics />} />
-          <Route path="*" element={<h1>Page Not found!</h1>} />
-        </Routes>
+    <BaseAPIContext>
+      <APIContext>
+        <MyContext>
+        <ToastContainer position='bottom-right' theme='colored' hideProgressBar autoClose="2000" ></ToastContainer>
+          <Routes>
+            <Route path="/" element={<GeneralRoute><HomePage /></GeneralRoute>}/>
+            <Route path="/login" element={<GeneralRoute><Login /></GeneralRoute>} />
+            <Route path="/signup" element={<GeneralRoute><Signup /></GeneralRoute>}/>
+            <Route path="/dashboard-overview" element={<WriterRoute><DashboardOverview /></WriterRoute>}/>
+            <Route path="/dashboard-overview/writer/dashboard" element={<WriterDashboard />} />
+            <Route path="/dashboard-overview/writer/dashboard/uptakenwork" element={<WriterUptakenWork />} />
+            <Route path="/dashboard-overview/writer/dashboard/assignedwork" element={<AssignedWork />} />
+            <Route path="/dashboard-overview/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/dashboard-overview/admin/dashboard/workorder" element={<WorkOrderManagement />} />
+            <Route path="/dashboard-overview/admin/dashboard/usermanagement" element={<UserManagementCenter />} />
+            <Route path="/dashboard-overview/admin/dashboard/assignmentstatus" element={<AssignmentStatus />} />
+            <Route path="/dashboard-overview/admin/dashboard/statistics" element={<Statistics />} />
+            <Route path="*" element={<h1>Page Not found!</h1>} />
+          </Routes>
 
 
 
-      <div className="bg-secondary h-full">
-      
-      </div>
-      </MyContext>
-    </APIContext>
+        <div className="bg-secondary h-full">
+        
+        </div>
+        </MyContext>
+      </APIContext>
+    </BaseAPIContext>
   )
 }
 

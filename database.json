@@ -27,7 +27,7 @@
       "password": "del234",
       "email": "del234@gmail.com",
       "phone": "0137863355",
-      "role": "Writer",
+      "role": "Admin",
       "id": 3
     }
   ],
@@ -40,6 +40,52 @@
       "assignedWriter": "",
       "specialRequirement": "None at all. Follow instructions in the attached file",
       "id": 1
+    },
+    {
+      "workID": "M919",
+      "title": "Discuss the Impact of technology on education",
+      "dueDate": "22nd Sep 2022",
+      "wordCount": "2000",
+      "assignedWriter": "",
+      "specialRequirement": "None at all. Follow instructions in the attached file",
+      "id": 2
+    },
+    {
+      "workID": "M919",
+      "title": "Discuss the Impact of technology on education",
+      "dueDate": "22nd Sep 2022",
+      "wordCount": "2000",
+      "assignedWriter": "",
+      "specialRequirement": "None at all. Follow instructions in the attached file",
+      "id": 3
+    },
+    {
+      "workID": "M919",
+      "title": "Discuss the Impact of technology on education",
+      "dueDate": "22nd Sep 2022",
+      "wordCount": "2000",
+      "assignedWriter": "",
+      "specialRequirement": "None at all. Follow instructions in the attached file",
+      "id": 4
+    },
+    {
+      "workID": "M919",
+      "title": "Discuss the Impact of technology on education",
+      "dueDate": "22nd Sep 2022",
+      "wordCount": "2000",
+      "assignedWriter": "",
+      "specialRequirement": "None at all. Follow instructions in the attached file",
+      "id": 5
+    },
+    {
+      "assignment_id": "V896",
+      "title": "Samuel Maiko Testing",
+      "deadline": "2023-10-11",
+      "word_count": "1500",
+      "assigned_writer": 10,
+      "additional_info": "Nothing else just that",
+      "author_id": 1,
+      "id": 6
     }
   ]
 }
