@@ -1,7 +1,7 @@
-import { useMyCustomHook } from "../../context/MyContext"
-import DashboardCard from "../shared/DashboardCard"
-import SideBar from "../shared/SideBar"
-import TitleManager from "../shared/TitleManager"
+import { useMyCustomHook } from "../../../context/MyContext"
+import DashboardCard from "../../reusable_components/DashboardCard"
+import SideBar from '../../reusable_components/SideBar'
+import TitleManager from "../../reusable_components/TitleManager"
 
 const AdminDashboard = () => {
     const {show, setShow}=useMyCustomHook()

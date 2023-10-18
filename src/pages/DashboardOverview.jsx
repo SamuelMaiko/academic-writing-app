@@ -2,14 +2,14 @@
 import {MdNotifications} from 'react-icons/md'
 
 
-import { useMyCustomHook } from '../../context/MyContext'
-import AssignmentCard from '../shared/AssignmentCard'
-import SideBar from '../shared/SideBar'
+import AssignmentCard from '../components/reusable_components/AssignmentCard'
+import SideBar from '../components/reusable_components/SideBar'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMyAPIcontext } from '../../context/APIs'
+// import { useMyAPIcontext } from '../../context/APIs'
 import axios from 'axios'
-import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
+import { useMyBaseAPIContext } from '../context/BaseAPIContext'
+import { useMyCustomHook } from '../context/MyContext'
 
 
  

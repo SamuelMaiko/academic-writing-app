@@ -1,5 +1,5 @@
-import UptakenWorkCard from "../components/common/UptakenWorkCard"
-import WriterTitleManager from "../components/writer/WriterTitleManager"
+import UptakenWorkCard from "../../reusable_components/UptakenWorkCard"
+import WriterTitleManager from "../../reusable_components/WriterTitleManager.jsx"
 
 
 const WriterUptakenWork = () => {

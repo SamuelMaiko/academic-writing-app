@@ -1,6 +1,6 @@
-import AdminTitleManager from "../components/admin/AdminTitleManager"
-import AssignmentStatusTableHead from "../components/admin/AssignmentStatusTableHead"
-import AssignmentStatusTableRow from "../components/admin/AssignmentStatusTableRow"
+import AdminTitleManager from '../../reusable_components/AdminTitleManager'
+import AssignmentStatusTableHead from "../AssignmentStatusTableHead"
+import AssignmentStatusTableRow from "../AssignmentStatusTableRow"
 
 const AssignmentStatus = () => {
   return (

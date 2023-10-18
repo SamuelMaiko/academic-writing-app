@@ -1,6 +1,6 @@
-import AdminTitleManager from "../components/admin/AdminTitleManager"
+import AdminTitleManager from '../../reusable_components/AdminTitleManager'
 import styled from 'styled-components'
-import BgImg from '../assets/images/bg-banner.png'
+import BgImg from '../../../assets/images/bg-banner.png'
 const BG_IMG=BgImg
 
 

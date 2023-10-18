@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import TitleManager from "../shared/TitleManager"
+// import TitleManager from "src/components/reusable_components/TitleManager"
 import {GoSearch} from 'react-icons/go'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -7,14 +7,14 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 // import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import WorkTableHead from "../common/WorkTableHead";
-import WorkTableRow from "../common/WorkTableRow"
-import CreateWorkform from "../common/CreateWorkform";
-import AdminTitleManager from "./AdminTitleManager";
+import WorkTableHead from "../WorkTableHead";
+import WorkTableRow from "../WorkTableRow"
+import CreateWorkform from "../CreateWorkform";
+import AdminTitleManager from "../../reusable_components/AdminTitleManager";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useMyAPIcontext } from "../../context/APIs";
-import { useMyBaseAPIContext } from "../../context/BaseAPIContext";
+// import { useMyAPIcontext } from "../../context/APIs";
+import { useMyBaseAPIContext } from "../../../context/BaseAPIContext";
 
 const WorkOrderManagement = () => {
     // const {availableWork}=useMyAPIcontext()
@@ -78,7 +78,7 @@ const WorkOrderManagement = () => {
                 <tbody>
                   {
                     availableWork.map((eachWork, index)=>{
-                      return <WorkTableRow key={index} ID={eachWork.id} W_ID={eachWork.assignment_id} W_TITLE={eachWork.title} W_DUEDATE={eachWork.deadline} W_WORDCOUNT={eachWork.word_count} W_WRITER={eachWork.assigned_writer.firstname} W_ATTACHMENT={eachWork.file_url} W_SPECIAL={eachWork.additional_info} />
+                      return <WorkTableRow key={index} ID={eachWork.id} W_ID={eachWork.assignment_id} W_TITLE={eachWork.title} W_DUEDATE={eachWork.deadline} W_WORDCOUNT={eachWork.word_count} W_WRITER={eachWork.assigned_writer?eachWork.assigned_writer:""} W_ATTACHMENT={eachWork.file_url} W_SPECIAL={eachWork.additional_info} />
                     })
                   }                    
                 </tbody>          

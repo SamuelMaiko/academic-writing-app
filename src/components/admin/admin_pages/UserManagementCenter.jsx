@@ -10,11 +10,11 @@ import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 // import TableHead from "../common/WorkTableHead";
 // import CreateWorkform from "../common/CreateWorkform";
-import UserMngTableHead from "../common/UserMngTableHead";
-import UserMngTableRow from "../common/UserMngTableRow";
-import CreateUserForm from "./CreateUserForm";
-import AdminTitleManager from "./AdminTitleManager";
-import { useMyAPIcontext } from "../../context/APIs";
+import UserMngTableHead from '../UserMngTableHead';
+import UserMngTableRow from '../UserMngTableRow';
+import CreateUserForm from "../CreateUserForm";
+import AdminTitleManager from '../../reusable_components/AdminTitleManager';
+import { useMyAPIcontext } from '../../../context/APIs.jsx';
 // import axios from "axios"; 
 
 const UserManagementCenter = () => {

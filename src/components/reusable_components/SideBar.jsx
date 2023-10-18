@@ -8,10 +8,11 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import SidePanel from '../common/SidePanel';
+import SidePanel from './SidePanel';
 import { useState } from 'react';
-import { useMyCustomHook } from '../../context/MyContext'
+// import { useMyCustomHook } from '../../context/MyContext'
 import { toast } from 'react-toastify'
+import { useMyCustomHook } from '../../context/MyContext'
 
 const SideBar = () => {
     const [expanded, setExpanded] = useState(false);

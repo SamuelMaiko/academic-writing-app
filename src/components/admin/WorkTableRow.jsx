@@ -43,7 +43,7 @@ const WorkTableRow = ({ID,W_ID,W_TITLE,W_DUEDATE,W_WORDCOUNT,W_WRITER,W_ATTACHME
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_TITLE}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_DUEDATE}</td>
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_WORDCOUNT}</td>
-        <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_WRITER}</td>
+        <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_WRITER?W_WRITER.firstname:""}</td>
         {/* <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_ATTACHMENT}</td> */}
         <td className="border-1 border-[rgba(0,0,0,0.2)] text-center">{W_SPECIAL}</td>
         

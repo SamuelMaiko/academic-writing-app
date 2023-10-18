@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
-import SignupImg from '../../assets/images/home-picture4.jpg'
-import NavBar from './NavBar'
-import { useMyCustomHook } from '../../context/MyContext'
+import SignupImg from '../assets/images/home-picture4.jpg'
+import NavBar from '../components/common/NavBar'
+import { useMyCustomHook } from '../context/MyContext'
 const SIGNUP_IMAGE=SignupImg
 const Signup = () => {
     const {show,navigate}=useMyCustomHook()

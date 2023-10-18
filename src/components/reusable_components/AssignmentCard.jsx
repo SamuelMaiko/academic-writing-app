@@ -7,7 +7,7 @@ const AssignmentCard = ({TITLE, DUE_DATE, WORD_COUNT,SPECIAL_REQUIREMENTS,ASSIGN
     // 34rem
     <div>
         <div className="card relative font-opensans w-[100%] h-[18rem] rounded-lg bg-secondary border-2 border-[#c3c6ce] transition-all duration-500  hover:border-btlinks shadow-[0_0_4px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)] cursor-pointer">
-            <div className="card-details text-black h-full overflow-y-scroll"> 
+            <div className="card-details text-black h-full overflow-y-hidden"> 
                 <p className=" md:text-[1.1rem] text-[1.3rem] font-normal font-opensans text-tcolor"><span className="font-semibold text-black">Title:</span>{TITLE}</p>
                 <p className=" text-[1rem] text-red-600 font-semibold"><span className="font-semibold text-black">Due date:</span> {DUE_DATE}</p>
                 <p className="text-[1rem]"><span className="font-semibold">Word Count:</span> {WORD_COUNT} words.</p>

@@ -1,12 +1,12 @@
 // import React from 'react'
 import { styled } from 'styled-components'
-import LowerImg from '../../assets/images/home-picture3.jpg'
-import NavBar from './NavBar'
-import { useMyCustomHook } from '../../context/MyContext'
+import LowerImg from '../assets/images/home-picture3.jpg'
+import NavBar from '../components/common/NavBar'
+import { useMyCustomHook } from '../context/MyContext'
 import * as React from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
+import { useMyBaseAPIContext } from '../context/BaseAPIContext'
 const LOWER_IMAGE=LowerImg
 
 const Login = () => {
