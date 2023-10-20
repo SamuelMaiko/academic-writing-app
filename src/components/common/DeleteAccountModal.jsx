@@ -1,10 +1,42 @@
+import axios from 'axios'
 import React from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { MdOutlineCancel } from 'react-icons/md'
+import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
+import { toast } from 'react-toastify'
 
-const DeleteAccountModal = ({setDeleteModalOpen}) => {
-    const handleDeleteAccount=(e)=>{
-        e.preventDefault()
+const DeleteAccountModal = ({onsetSpecificUser,setDeleteModalOpen,user_id,user_role}) => {
+
+  const {BASE_URL}=useMyBaseAPIContext()
+
+  const handleDeleteAccount=(e)=>{
+      e.preventDefault()
+
+      if (user_role=="Admin"){
+        axios.delete(`${BASE_URL}/admins/${user_id}`)
+        .then(response=>{
+          onsetSpecificUser(null)
+          toast.success("Account delete successful")
+        })
+        .catch(error=>{
+          toast.error("Error while deleting account")
+        })
+      }
+      else if(user_role=="Writer"){
+        axios.delete(`${BASE_URL}/writers/${user_id}`)
+        .then(response=>{
+          onsetSpecificUser(null)
+          toast.success("Account delete successful")
+        })
+        .catch(error=>{
+          toast.error("Error while deleting account")
+        })
+      }
+      else if(user_role=="Main Admin"){
+        toast.error("Account delete failed")
+      }
+
+
         setDeleteModalOpen(false)
       }
   return (

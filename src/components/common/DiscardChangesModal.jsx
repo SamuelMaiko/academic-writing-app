@@ -2,10 +2,12 @@ import React from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { MdOutlineCancel } from 'react-icons/md'
 
-const DiscardChangesModal = ({setDiscardModalOpen}) => {
+const DiscardChangesModal = ({onsetIsEditing,setDiscardModalOpen}) => {
     const handleDiscardChanges=(e)=>{
         e.preventDefault()
         setDiscardModalOpen(false)
+        onsetIsEditing(false)
+
       }
   return (
     <div>

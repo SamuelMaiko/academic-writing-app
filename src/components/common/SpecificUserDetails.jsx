@@ -42,6 +42,7 @@ const SpecificUserDetails = () => {
     .catch(error=>{
       toast.error("Error getting the specific user")
     })
+    // ______________________________ fetching user_profile
 
     axios.get(`${BASE_URL}/user_profiles/${workId}`)
     .then(response=>{
@@ -52,21 +53,10 @@ const SpecificUserDetails = () => {
     })
   },[])
 
-
-
+const handleEditDetails=()=>{
   
-  // console.log(userProfile.profile_url)
-  
-  
-  const userCardStyles={
-    // background:`url(${userProfile.profile_url})`,
-    backgroundSize:'cover',
-    backgroundAttachment:'scroll',
-    backgroundPosition:'center center'
-
-
 }
-
+  
 
 const handleOnClickEditBtn=()=>{
   setIsEditing(!isEditing)
@@ -86,7 +76,21 @@ const handleOnClickEditBtn=()=>{
   const setRightsModalOpen=(newState)=>{
     onsetRightsModalOpen(newState)
   }
-  
+  const onsetSpecificUser=(newState)=>{
+    setSpecificUser(newState)
+  }
+  const onsetIsEditing=(newState)=>{
+    setIsEditing(newState)
+  }
+
+
+  const userCardStyles={
+    // background:`url(${userProfile.profile_url})`,
+    backgroundSize:'cover',
+    backgroundAttachment:'scroll',
+    backgroundPosition:'center center'
+}
+
   return (
     <div className={`w-full h-screen ${isEditing?"bg-[#e0e0e0]":""} transition-all duration-300`}>
         <div className="w-[75%] h-full mx-auto">
@@ -111,7 +115,7 @@ const handleOnClickEditBtn=()=>{
           </div>
 
           {
-            specificUser&&
+            specificUser?
           <section className='mt-10 pl-2'>
             <div className={`flex flex-col  ${isEditing? "h-[18.5rem] gap-y-1":"h-[16.77rem] gap-y-3"} transition-height duration-300`}>
               <div className={`${isEditing?"mb-1":""}`}>
@@ -139,9 +143,12 @@ const handleOnClickEditBtn=()=>{
               <button onClick={()=>setDeleteModalOpen(true)} className={`${isEditing?"hidden":""} py-2 px-5 bg-red-500 text-white hover:bg-[#c92416] transition-background transition-all duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><AiOutlineDelete/></span><span>Delete</span></button>
               <button onClick={()=>setDeactivateModalOpen(true)} className={`${isEditing?"hidden":""} transition-all py-2 px-5 bg-[#888] text-white hover:bg-[#666] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Deactivate</span></button>
               <button onClick={()=>setDiscardModalOpen(true)} className={`${isEditing?"":"hidden"} py-2 px-5 bg-[#FF5733] text-white hover:bg-[#FF2900] transition-background transition-all duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><AiOutlineDelete/></span><span>Discard changes</span></button>
-              <button className={`${isEditing?"":"hidden"} transition-all py-2 px-5 bg-[#00CC66] text-white hover:bg-[#00994D] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Save Changes</span></button>
+              <button onClick={handleEditDetails} className={`${isEditing?"":"hidden"} transition-all py-2 px-5 bg-[#00CC66] text-white hover:bg-[#00994D] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Save Changes</span></button>
             </div>
             {/* Are you sure you want to discard changes? */}
+          </section>:
+          <section className='flex justify-center'>
+            <h1 className='text-4xl font-medium mt-7'>User not found! </h1>
           </section>
           }
 
@@ -150,13 +157,13 @@ const handleOnClickEditBtn=()=>{
         {/* __________________________________________Discard new changes modal */}
 
         <div className={`fixed ${discardModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
-          <DiscardChangesModal setDiscardModalOpen={setDiscardModalOpen} />
+          <DiscardChangesModal onsetIsEditing={onsetIsEditing} setDiscardModalOpen={setDiscardModalOpen} />
         </div> 
 
 
         {/* __________________________________________delete account modal */}
         <div className={`fixed ${deleteModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
-            <DeleteAccountModal setDeleteModalOpen={setDeleteModalOpen} />
+            <DeleteAccountModal onsetSpecificUser={onsetSpecificUser} setDeleteModalOpen={setDeleteModalOpen} user_id={specificUser&& specificUser.work_id} user_role={specificUser && specificUser.role} />
         </div>
 
 
