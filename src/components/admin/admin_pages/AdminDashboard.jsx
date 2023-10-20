@@ -10,7 +10,7 @@ const AdminDashboard = () => {
         {
             title:"User Management Center",
             description: "Create, delete and deactivate user accounts",
-            link:"/dashboard-overview/admin/dashboard/usermanagement"
+            link:"/dashboard/usermanagement"
         },
         {
             title:"Work Order Management",

@@ -14,6 +14,7 @@ import AssignmentStatus from './components/admin/admin_pages/AssignmentStatus'
 import Statistics from './components/admin/admin_pages/Statistics'
 import WriterUptakenWork from './components/writer/writer_pages/WriterUptakenWork'
 import AssignedWork from './components/writer/writer_pages/AssignedWork'
+import SpecificUserDetails from './components/common/SpecificUserDetails'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from "react-toastify"
 import BaseAPIContext from './context/BaseAPIContext'
@@ -67,9 +68,10 @@ const App = () => {
             <Route path="/dashboard-overview/writer/dashboard/assignedwork" element={<AssignedWork />} />
             <Route path="/dashboard-overview/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/dashboard-overview/admin/dashboard/workorder" element={<WorkOrderManagement />} />
-            <Route path="/dashboard-overview/admin/dashboard/usermanagement" element={<UserManagementCenter />} />
+            <Route path="/dashboard/usermanagement" element={<UserManagementCenter />} />
             <Route path="/dashboard-overview/admin/dashboard/assignmentstatus" element={<AssignmentStatus />} />
             <Route path="/dashboard-overview/admin/dashboard/statistics" element={<Statistics />} />
+            <Route path="users/:workId" element={<SpecificUserDetails />}/>
             <Route path="*" element={<h1>Page Not found!</h1>} />
           </Routes>
 

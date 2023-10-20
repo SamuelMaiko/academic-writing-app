@@ -14,6 +14,8 @@ export default {
         'hover':'#666666',
         'btlinks':'#799c79',
         "tcolor":'#333333',
+        "bgcolor":"#f5f5f5",
+        'textLinks':'#0374b5'
         
       },
       fontFamily: {

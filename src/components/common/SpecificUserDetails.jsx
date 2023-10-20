@@ -1,0 +1,179 @@
+import { FaRegEdit, FaRegUser } from 'react-icons/fa'
+import {HiOutlineOfficeBuilding} from 'react-icons/hi'
+import {MdOutlineCancel, MdOutlineEmail, MdSettingsPower} from 'react-icons/md'
+import {MdOutlineArrowBack} from 'react-icons/md'
+import {MdOutlineAdminPanelSettings} from 'react-icons/md'
+import {AiOutlineDelete, AiOutlinePhone,AiOutlineCheck} from 'react-icons/ai'
+// import {AiOutlineCheck} from 'react-icons/ai'
+import ProfilePicture from '../../assets/images/home-picture2.jpeg'
+import InfoDisplay from '../reusable_components/InfoDisplay'
+import { useEffect, useState } from 'react'
+import { NavLink, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
+import { toast } from 'react-toastify'
+import DiscardChangesModal from './DiscardChangesModal'
+import DeleteAccountModal from './DeleteAccountModal'
+import DeactivateAccountModal from './DeactivateAccountModal'
+import EditAdminRightsModal from './EditAdminRightsModal'
+
+
+
+const SpecificUserDetails = () => {
+  const [deleteModalOpen, onsetDeleteModalOpen] = useState(false)
+  const [deactivateModalOpen, onsetDeactivateModalOpen] = useState(false)
+  const [discardModalOpen, onsetDiscardModalOpen] = useState(false)
+  const [rightsModalOpen,onsetRightsModalOpen]=useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const {BASE_URL}=useMyBaseAPIContext()
+  const [specificUser, setSpecificUser]=useState(null)
+  const [userProfile, setUserProfile]=useState({})
+
+  const {workId}=useParams()
+
+  useEffect(()=>{
+    axios.get(`${BASE_URL}/users/${workId}`)
+    .then(response=>{
+      // console.log(response.data.user_profile.profile_url);
+      setSpecificUser(response.data);
+      
+      // setUserProfile(response.data.user_profile)
+    })
+    .catch(error=>{
+      toast.error("Error getting the specific user")
+    })
+
+    axios.get(`${BASE_URL}/user_profiles/${workId}`)
+    .then(response=>{
+      setUserProfile(response.data)
+    })
+    .catch(error=>{
+      toast.error("Error getting the specific user profile")
+    })
+  },[])
+
+
+
+  
+  // console.log(userProfile.profile_url)
+  
+  
+  const userCardStyles={
+    // background:`url(${userProfile.profile_url})`,
+    backgroundSize:'cover',
+    backgroundAttachment:'scroll',
+    backgroundPosition:'center center'
+
+
+}
+
+
+const handleOnClickEditBtn=()=>{
+  setIsEditing(!isEditing)
+
+}
+
+// ___________________________useState setters passed as props
+  const setDiscardModalOpen=(newState)=>{
+    onsetDiscardModalOpen(newState)
+  }
+  const setDeleteModalOpen=(newState)=>{
+    onsetDeleteModalOpen(newState)
+  }
+  const setDeactivateModalOpen=(newState)=>{
+    onsetDeactivateModalOpen(newState)
+  }
+  const setRightsModalOpen=(newState)=>{
+    onsetRightsModalOpen(newState)
+  }
+  
+  return (
+    <div className={`w-full h-screen ${isEditing?"bg-[#e0e0e0]":""} transition-all duration-300`}>
+        <div className="w-[75%] h-full mx-auto">
+          <div className='flex justify-between items-center py-4 pr-4'>
+
+            <div className='relative pl-2'>
+              <h1 className='text-[2.5rem] font-medium'>User Information</h1>
+              <p className='text-md'>User information is shown below. To edit click on the Edit Information button.</p>
+              <button className="absolute px-5 py-2 bg-blue-800 hover:bg-blue-900 text-white flex items-center"><span className="mr-2"><MdOutlineArrowBack /></span><NavLink to="/dashboard/usermanagement">Go Back</NavLink></button>
+            </div>
+
+            <p className={`${isEditing?"opacity-1 visible":"invisible opacity-0"} transition-all duration-300 text-xl text-[#000000] bg-yellow-300 py-1 px-4 font-medium`}>Edit mode</p>
+            <p onClick={()=>setRightsModalOpen(true)} className={`${!isEditing?"opacity-1 visible":"invisible opacity-0"} transition-all duration-300 text-textLinks underline hover:no-underline cursor-pointer`}>Edit admin rights</p>
+
+            <div className='flex flex-col items-center '>
+              <div className='w-[3.4rem] h-[3.4rem] rounded-full overflow-hidden flex items-center justify-center'>
+                <img src={`${userProfile.profile_url}`} style={userCardStyles} className='w-full h-full '></img>
+              </div>
+              <p className={`${specificUser&& specificUser.account_status=="Active"?"text-green-500":"text-red-500"} text-md bg-white`}>{specificUser && specificUser.account_status}</p>
+              {/* <p><span>Samuel</span> <span>Maiko</span> </p> */}
+            </div>
+          </div>
+
+          {
+            specificUser&&
+          <section className='mt-10 pl-2'>
+            <div className={`flex flex-col  ${isEditing? "h-[18.5rem] gap-y-1":"h-[16.77rem] gap-y-3"} transition-height duration-300`}>
+              <div className={`${isEditing?"mb-1":""}`}>
+                <InfoDisplay isEditing={isEditing} title="Work ID" detail={specificUser.work_id} icon={<HiOutlineOfficeBuilding/>}/>
+              </div>
+              <div className=''>
+                <InfoDisplay isEditing={isEditing} title="First Name" detail={specificUser.firstname} icon={<FaRegUser/>}/>
+              </div>
+              <div className=''>
+                <InfoDisplay isEditing={isEditing} title="Last Name" detail={specificUser.lastname} icon={<FaRegUser/>}/>
+              </div>
+              <div className=''>
+                <InfoDisplay isEditing={isEditing} title="Phone number" detail="+254729165447" icon={<AiOutlinePhone/>}/>
+              </div>
+              <div className=''>
+                <InfoDisplay isEditing={isEditing} title="Email" detail={specificUser.email} icon={<MdOutlineEmail/>}/>
+              </div>
+              <div className=''>
+                <InfoDisplay isEditing={isEditing} title="Role" detail={specificUser.role} icon={<MdOutlineAdminPanelSettings/>}/>
+              </div>
+            </div>
+
+            <div className={`flex justify-between w-[65%] ${isEditing?"mt-[4.25rem]":"mt-24"} transition-all duration-300 pl-4`}>
+              <button onClick={handleOnClickEditBtn} className={`py-2 px-5 ${isEditing?"text-black bg-[#cccccc] hover:bg-[#999999]":"text-white"} bg-[#4287f5]  hover:bg-[#3366cc] transition-background duration-300 rounded-lg flex items-center`}><span className='mr-1 text-lg'>{isEditing?<MdOutlineArrowBack />:<FaRegEdit/>}</span><span>{isEditing?"Back":"Edit"}</span></button>
+              <button onClick={()=>setDeleteModalOpen(true)} className={`${isEditing?"hidden":""} py-2 px-5 bg-red-500 text-white hover:bg-[#c92416] transition-background transition-all duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><AiOutlineDelete/></span><span>Delete</span></button>
+              <button onClick={()=>setDeactivateModalOpen(true)} className={`${isEditing?"hidden":""} transition-all py-2 px-5 bg-[#888] text-white hover:bg-[#666] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Deactivate</span></button>
+              <button onClick={()=>setDiscardModalOpen(true)} className={`${isEditing?"":"hidden"} py-2 px-5 bg-[#FF5733] text-white hover:bg-[#FF2900] transition-background transition-all duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><AiOutlineDelete/></span><span>Discard changes</span></button>
+              <button className={`${isEditing?"":"hidden"} transition-all py-2 px-5 bg-[#00CC66] text-white hover:bg-[#00994D] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Save Changes</span></button>
+            </div>
+            {/* Are you sure you want to discard changes? */}
+          </section>
+          }
+
+        </div>
+
+        {/* __________________________________________Discard new changes modal */}
+
+        <div className={`fixed ${discardModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
+          <DiscardChangesModal setDiscardModalOpen={setDiscardModalOpen} />
+        </div> 
+
+
+        {/* __________________________________________delete account modal */}
+        <div className={`fixed ${deleteModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
+            <DeleteAccountModal setDeleteModalOpen={setDeleteModalOpen} />
+        </div>
+
+
+        {/* __________________________________________deactivate account modal */}
+        <div className={`fixed ${deactivateModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
+            <DeactivateAccountModal setDeactivateModalOpen={setDeactivateModalOpen} />          
+        </div>
+
+        {/* __________________________________________ edit admin rights modal */}
+        <div className={`fixed ${rightsModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
+            <EditAdminRightsModal setRightsModalOpen={setRightsModalOpen} />          
+        </div>
+
+        
+        
+    </div>
+  )
+}
+
+export default SpecificUserDetails

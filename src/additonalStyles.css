@@ -1,0 +1,8 @@
+.user-card{
+    /* background-color: aqua; */
+}
+.user-card:hover .seemore-btn{
+    /* background-color: #fff; */
+    background-color: rgb(30 58 138);
+    color:white;
+}
