@@ -1,11 +1,9 @@
 import { FaRegEdit, FaRegUser } from 'react-icons/fa'
 import {HiOutlineOfficeBuilding} from 'react-icons/hi'
-import {MdOutlineCancel, MdOutlineEmail, MdSettingsPower} from 'react-icons/md'
+import {MdOutlineEmail, MdSettingsPower} from 'react-icons/md'
 import {MdOutlineArrowBack} from 'react-icons/md'
 import {MdOutlineAdminPanelSettings} from 'react-icons/md'
-import {AiOutlineDelete, AiOutlinePhone,AiOutlineCheck} from 'react-icons/ai'
-// import {AiOutlineCheck} from 'react-icons/ai'
-import ProfilePicture from '../../assets/images/home-picture2.jpeg'
+import {AiOutlineDelete, AiOutlinePhone} from 'react-icons/ai'
 import InfoDisplay from '../reusable_components/InfoDisplay'
 import { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
@@ -25,41 +23,68 @@ const SpecificUserDetails = () => {
   const [discardModalOpen, onsetDiscardModalOpen] = useState(false)
   const [rightsModalOpen,onsetRightsModalOpen]=useState(false)
   const [isEditing, setIsEditing] = useState(false)
-  const {BASE_URL}=useMyBaseAPIContext()
-  const [specificUser, setSpecificUser]=useState(null)
+  const {BASE_URL,specificUser,setSpecificUser,saveChangesAndPatch}=useMyBaseAPIContext()
+  const [adminRights, setAdminRights]=useState([])
   const [userProfile, setUserProfile]=useState({})
 
   const {workId}=useParams()
 
   useEffect(()=>{
+    // ________________________ getting the specific user
     axios.get(`${BASE_URL}/users/${workId}`)
-    .then(response=>{
-      // console.log(response.data.user_profile.profile_url);
-      setSpecificUser(response.data);
-      
-      // setUserProfile(response.data.user_profile)
-    })
-    .catch(error=>{
-      toast.error("Error getting the specific user")
-    })
-    // ______________________________ fetching user_profile
+    .then(response=>setSpecificUser(response.data))
+    .catch(()=>toast.error("Error getting the specific user"))
 
+    // ______________________________ fetching specific user PROFILE(profile_url,bio,username)
     axios.get(`${BASE_URL}/user_profiles/${workId}`)
+    .then(response=>setUserProfile(response.data))
+    .catch(()=>toast.error("Error getting the specific user profile"))
+
+    // ___________________________ fetching user admin privileges
+    
+    axios.get(`${BASE_URL}/privilege_by_user_id/${workId}`)
     .then(response=>{
-      setUserProfile(response.data)
+      setAdminRights(response.data)
     })
-    .catch(error=>{
-      toast.error("Error getting the specific user profile")
+    .catch(()=>{
+      toast.error("Error while getting rights")
     })
+    
+
+
   },[])
 
 const handleEditDetails=()=>{
-  
+  saveChangesAndPatch()
+  setIsEditing(false)
+
 }
+//   saveChangesAndPatch()
+  // const value=
+  // if (value){
+  //   alert("Wow")
+  // }
+//   saveChangesAndPatch
+//   const UPDATED_USER_DETAILS={
+//     firstname:firstName,
+//     lastname:lastName,
+//     phoneNumber,
+//     email,
+//     role
+// }
+// axios.patch(`${BASE_URL}/users/${workId}`,details)
+// .then(response=>{
+//     console.log(response.data)
+// })
+// .catch(error=>{
+//     toast.error("Error while updating details")
+// })
+// }
   
 
 const handleOnClickEditBtn=()=>{
   setIsEditing(!isEditing)
+  
 
 }
 
@@ -90,26 +115,33 @@ const handleOnClickEditBtn=()=>{
     backgroundAttachment:'scroll',
     backgroundPosition:'center center'
 }
+  let profile_url=userProfile.profile_url
+  if (profile_url==null){
+    profile_url="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+  }
 
   return (
     <div className={`w-full h-screen ${isEditing?"bg-[#e0e0e0]":""} transition-all duration-300`}>
         <div className="w-[75%] h-full mx-auto">
           <div className='flex justify-between items-center py-4 pr-4'>
 
-            <div className='relative pl-2'>
+            <div className='relative pl-2 mb-5'>
               <h1 className='text-[2.5rem] font-medium'>User Information</h1>
               <p className='text-md'>User information is shown below. To edit click on the Edit Information button.</p>
-              <button className="absolute px-5 py-2 bg-blue-800 hover:bg-blue-900 text-white flex items-center"><span className="mr-2"><MdOutlineArrowBack /></span><NavLink to="/dashboard/usermanagement">Go Back</NavLink></button>
+              <button className="absolute -bottom-14 px-5 py-2 bg-blue-800 hover:bg-blue-900 text-white flex items-center"><span className="mr-2"><MdOutlineArrowBack /></span><NavLink to="/dashboard/usermanagement">Go Back</NavLink></button>
             </div>
 
             <p className={`${isEditing?"opacity-1 visible":"invisible opacity-0"} transition-all duration-300 text-xl text-[#000000] bg-yellow-300 py-1 px-4 font-medium`}>Edit mode</p>
-            <p onClick={()=>setRightsModalOpen(true)} className={`${!isEditing?"opacity-1 visible":"invisible opacity-0"} transition-all duration-300 text-textLinks underline hover:no-underline cursor-pointer`}>Edit admin rights</p>
+            <p onClick={()=>setRightsModalOpen(true)} className={`${!isEditing?"opacity-1 visible":"invisible opacity-0"} ${specificUser && specificUser.role=="Writer"?"hidden": ""} transition-all duration-300 text-textLinks underline hover:no-underline cursor-pointer`}>Edit admin rights</p>
 
             <div className='flex flex-col items-center '>
               <div className='w-[3.4rem] h-[3.4rem] rounded-full overflow-hidden flex items-center justify-center'>
-                <img src={`${userProfile.profile_url}`} style={userCardStyles} className='w-full h-full '></img>
+                <img src={`${profile_url}`} style={userCardStyles} className='w-full h-full '></img>
               </div>
+              {
+                specificUser &&              
               <p className={`${specificUser&& specificUser.account_status=="Active"?"text-green-500":"text-red-500"} text-md bg-white`}>{specificUser && specificUser.account_status}</p>
+              }
               {/* <p><span>Samuel</span> <span>Maiko</span> </p> */}
             </div>
           </div>
@@ -141,7 +173,7 @@ const handleOnClickEditBtn=()=>{
             <div className={`flex justify-between w-[65%] ${isEditing?"mt-[4.25rem]":"mt-24"} transition-all duration-300 pl-4`}>
               <button onClick={handleOnClickEditBtn} className={`py-2 px-5 ${isEditing?"text-black bg-[#cccccc] hover:bg-[#999999]":"text-white"} bg-[#4287f5]  hover:bg-[#3366cc] transition-background duration-300 rounded-lg flex items-center`}><span className='mr-1 text-lg'>{isEditing?<MdOutlineArrowBack />:<FaRegEdit/>}</span><span>{isEditing?"Back":"Edit"}</span></button>
               <button onClick={()=>setDeleteModalOpen(true)} className={`${isEditing?"hidden":""} py-2 px-5 bg-red-500 text-white hover:bg-[#c92416] transition-background transition-all duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><AiOutlineDelete/></span><span>Delete</span></button>
-              <button onClick={()=>setDeactivateModalOpen(true)} className={`${isEditing?"hidden":""} transition-all py-2 px-5 bg-[#888] text-white hover:bg-[#666] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Deactivate</span></button>
+              <button onClick={()=>setDeactivateModalOpen(true)} className={`${isEditing?"hidden":""} ${specificUser && specificUser.account_status!=="Active"?"bg-[#4CAF50] hover:bg-[#45A049]":"bg-[#888] hover:bg-[#666]"} transition-all py-2 px-5 text-white transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>{specificUser&& specificUser.account_status=="Deactivated"?"Activate":"Deactivate"}</span></button>
               <button onClick={()=>setDiscardModalOpen(true)} className={`${isEditing?"":"hidden"} py-2 px-5 bg-[#FF5733] text-white hover:bg-[#FF2900] transition-background transition-all duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><AiOutlineDelete/></span><span>Discard changes</span></button>
               <button onClick={handleEditDetails} className={`${isEditing?"":"hidden"} transition-all py-2 px-5 bg-[#00CC66] text-white hover:bg-[#00994D] transition-background duration-500 rounded-lg flex items-center`}><span className='mr-1 text-lg'><MdSettingsPower/></span><span>Save Changes</span></button>
             </div>
@@ -169,12 +201,12 @@ const handleOnClickEditBtn=()=>{
 
         {/* __________________________________________deactivate account modal */}
         <div className={`fixed ${deactivateModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
-            <DeactivateAccountModal setDeactivateModalOpen={setDeactivateModalOpen} />          
+            <DeactivateAccountModal account_status={specificUser && specificUser.account_status} workId={workId} setDeactivateModalOpen={setDeactivateModalOpen} />          
         </div>
 
         {/* __________________________________________ edit admin rights modal */}
         <div className={`fixed ${rightsModalOpen?"": "hidden"} top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.5)]`}>
-            <EditAdminRightsModal setRightsModalOpen={setRightsModalOpen} />          
+            <EditAdminRightsModal adminRights={adminRights} workId={workId} setRightsModalOpen={setRightsModalOpen} />          
         </div>
 
         

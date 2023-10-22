@@ -1,20 +1,22 @@
+import axios from 'axios'
 import React, { useEffect, useState,useRef } from 'react'
+import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const InputField = ({title, detail, isEditing}) => {
     
     const [currentValue, setCurrentValue] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [email, setEmail] = useState("")
-    const [role, setRole] = useState("")
+    
     const [showPhoneError,setShowPhoneError]=useState(false)
     const [showEmailError, setShowEmailError] = useState(false)
     const [emailError, setEmailError] = useState("")
     const [phoneNoError, setPhoneNoError] = useState("")
     const firstNameRef=useRef()
+    const {BASE_URL,setFirstName,setLastName,setPhoneNumber,setEmail,setRole,setWorkId}=useMyBaseAPIContext()
+    const {workId}=useParams()
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         if (title=="First Name"){
             setCurrentValue(detail)
             setFirstName(detail)
@@ -34,9 +36,10 @@ const InputField = ({title, detail, isEditing}) => {
         }
         else if (title=="Role"){
             setCurrentValue(detail)
+            setRole(detail)
         }
 
-        
+        setWorkId(workId)
 
     },[])
 
@@ -62,7 +65,9 @@ const InputField = ({title, detail, isEditing}) => {
         }
     }
     // _________________________input onchange
+
     const handleInputChange=(e)=>{
+
         setCurrentValue(e.target.value)
         if (title=="First Name"){
             setFirstName(e.target.value)
@@ -78,12 +83,14 @@ const InputField = ({title, detail, isEditing}) => {
             setEmail(e.target.value)
             validateEmail(e.target.value)
         }
-        // else if (title=="Role"){
-        //     setFirstName(e.target.value)
-        // }
-        console.log(firstName,lastName,phoneNumber,email)
+        else if (title=="Role"){
+            setRole(e.target.value)
+        }
+        // console.log(firstName,lastName,phoneNumber,email,role)
 
     }
+
+    
   return (
     <div>
         {

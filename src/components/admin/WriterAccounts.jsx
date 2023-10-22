@@ -6,7 +6,7 @@ import axios from "axios"
 import { useMyBaseAPIContext } from "../../context/BaseAPIContext"
 import Pagination from "../reusable_components/Pagination"
 
-const AdminAccounts = () => {
+const WriterAccounts = ({createUserOpenModel}) => {
     const {BASE_URL}=useMyBaseAPIContext()
     const [writers,setWriters]=useState()
 
@@ -15,7 +15,8 @@ const AdminAccounts = () => {
         .then(response=>{
             setWriters(response.data)
         })
-    },[])
+    },[createUserOpenModel])
+
     const [currentPage, setCurrentPage]=useState(1)
     
     const cardsPerPage=6
@@ -44,4 +45,4 @@ const AdminAccounts = () => {
   )
 }
 
-export default AdminAccounts
+export default WriterAccounts

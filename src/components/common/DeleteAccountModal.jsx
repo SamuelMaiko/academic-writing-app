@@ -12,8 +12,8 @@ const DeleteAccountModal = ({onsetSpecificUser,setDeleteModalOpen,user_id,user_r
   const handleDeleteAccount=(e)=>{
       e.preventDefault()
 
-      if (user_role=="Admin"){
-        axios.delete(`${BASE_URL}/admins/${user_id}`)
+
+      axios.delete(`${BASE_URL}/users/${user_id}`)
         .then(response=>{
           onsetSpecificUser(null)
           toast.success("Account delete successful")
@@ -21,20 +21,29 @@ const DeleteAccountModal = ({onsetSpecificUser,setDeleteModalOpen,user_id,user_r
         .catch(error=>{
           toast.error("Error while deleting account")
         })
-      }
-      else if(user_role=="Writer"){
-        axios.delete(`${BASE_URL}/writers/${user_id}`)
-        .then(response=>{
-          onsetSpecificUser(null)
-          toast.success("Account delete successful")
-        })
-        .catch(error=>{
-          toast.error("Error while deleting account")
-        })
-      }
-      else if(user_role=="Main Admin"){
-        toast.error("Account delete failed")
-      }
+      // if (user_role=="Admin"){
+      //   axios.delete(`${BASE_URL}/admins/${user_id}`)
+      //   .then(response=>{
+      //     onsetSpecificUser(null)
+      //     toast.success("Account delete successful")
+      //   })
+      //   .catch(error=>{
+      //     toast.error("Error while deleting account")
+      //   })
+      // }
+      // else if(user_role=="Writer"){
+      //   axios.delete(`${BASE_URL}/writers/${user_id}`)
+      //   .then(response=>{
+      //     onsetSpecificUser(null)
+      //     toast.success("Account delete successful")
+      //   })
+      //   .catch(error=>{
+      //     toast.error("Error while deleting account")
+      //   })
+      // }
+      // else if(user_role=="Main Admin"){
+      //   toast.error("Account delete failed")
+      // }
 
 
         setDeleteModalOpen(false)

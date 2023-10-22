@@ -1,13 +1,59 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { MdOutlineCancel } from 'react-icons/md'
+import { useMyBaseAPIContext } from '../../context/BaseAPIContext'
+import { toast } from 'react-toastify'
 
-const EditAdminRightsModal = ({setRightsModalOpen}) => {
-    const [on1,setOn1]=useState(true)
+const EditAdminRightsModal = ({adminRights, workId, setRightsModalOpen}) => {
+    const [on1,setOn1]=useState(false)
     const [on2,setOn2]=useState(false)
     const [on3,setOn3]=useState(false)
     const [on4,setOn4]=useState(false)
     const [on5,setOn5]=useState(false)
+    const {BASE_URL}=useMyBaseAPIContext()
+
+    useEffect(()=>{
+      
+      // fetchAdminRights()
+      // toast.success("fetching")
+      for( const each of adminRights){
+        if (each.id==1){
+          setOn1(true)
+        }
+        if (each.id==2){
+          setOn2(true)
+        }
+        if (each.id==3){
+          setOn3(true)
+        }
+        if (each.id==4){
+          setOn4(true)
+        }
+        if (each.id==5){
+          setOn5(true)
+        }
+      }
+
+    },[adminRights])
+
+    const handleSubmitNewRights=()=>{
+      setRightsModalOpen(false)
+      const newRights={
+        privilege1:on1,
+        privilege2:on2,
+        privilege3:on3,
+        privilege4:on4,
+        privilege5:on5
+      }
+
+      axios.patch(`${BASE_URL}/privilege_by_user_id/${workId}`,newRights)
+      .then(()=>toast.success("rights updated successfully"))
+      .catch(()=> toast.error("rights update failed"))
+    }
+
+
+    
   return (
     <div>
         <div className='absolute w-[460px] p-4 left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] bg-bgcolor rounded-lg'>
@@ -50,7 +96,7 @@ const EditAdminRightsModal = ({setRightsModalOpen}) => {
             </div>
             <div className='flex justify-between mt-7 px-4'>
               <button onClick={()=>setRightsModalOpen(false)} className='py-2 px-5 bg-[#FF5733] text-white hover:bg-[#D7391E] transition-background duration-300 rounded-lg flex items-center'><span className='mr-1'><MdOutlineCancel/></span><span>Cancel</span></button>
-              <button onClick={()=>setRightsModalOpen(false)} className='py-2 px-5 bg-[#4CAF50] hover:bg-[#45A049] text-white transition-background duration-300 rounded-lg flex items-center'><span className='mr-1'><AiOutlineCheck/></span><span>Save</span></button>
+              <button onClick={handleSubmitNewRights} className='py-2 px-5 bg-[#4CAF50] hover:bg-[#45A049] text-white transition-background duration-300 rounded-lg flex items-center'><span className='mr-1'><AiOutlineCheck/></span><span>Save</span></button>
             </div>
             {/* __________cancel btn */}
             <div onClick={()=>setRightsModalOpen(false)} className='absolute top-2 right-3 w-8 h-5 hover:text-[#666] cursor-pointer'>

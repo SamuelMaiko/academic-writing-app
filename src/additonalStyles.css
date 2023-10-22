@@ -1,8 +1,20 @@
-.user-card{
-    /* background-color: aqua; */
-}
+/* .user-card{
+    background-color: aqua;
+} */
 .user-card:hover .seemore-btn{
     /* background-color: #fff; */
     background-color: rgb(30 58 138);
     color:white;
 }
+
+/* .user-card:hover .seemore-btn{
+    transform: scale(1.01);
+}
+.names{
+    transition: all 500ms ease;    
+}
+.user-card:hover .names{
+    transform: scale(1.01);
+
+    background-color: red;
+} */
