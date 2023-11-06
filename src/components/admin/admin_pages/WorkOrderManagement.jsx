@@ -15,27 +15,76 @@ import axios from "axios";
 import { toast } from "react-toastify";
 // import { useMyAPIcontext } from "../../context/APIs";
 import { useMyBaseAPIContext } from "../../../context/BaseAPIContext";
+import { BsPersonFillAdd } from "react-icons/bs";
+import useLocalStorage from "../../../customHooks/useLocalStorage";
+import AssignedAssignments from "../AssignedAssignments";
+import UnAssignedAssignments from "../UnAssignedAssignments";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const WorkOrderManagement = () => {
     // const {availableWork}=useMyAPIcontext()
-    const [open3, setOpen3] =useState(false);
-    const handleOpen3 = () => setOpen3(true);
-    const handleClose3 = () => setOpen3(false);
+    // const [open3, setOpen3] =useState(false);
+    // const handleOpen3 = () => setOpen3(true);
+    // const handleClose3 = () => setOpen3(false);
     
-    const [availableWork, setAvailableWork] = useState([])
-    const TASKS_COUNT=availableWork.length
-    const {BASE_URL}=useMyBaseAPIContext()
+    // const [availableWork, setAvailableWork] = useState([])
+    // // const TASKS_COUNT=availableWork.length
+    // const {BASE_URL}=useMyBaseAPIContext()
 
-    useEffect(()=>{
-      axios.get(`${BASE_URL}/assignments`)
-      .then(response=>setAvailableWork(response.data))
+    // useEffect(()=>{
+    //   axios.get(`${BASE_URL}/assignments`)
+    //   .then(response=>setAvailableWork(response.data))
 
-    },[])
+    // },[])
+
+  const [showAssignedAssignments, setShowAssignedAssignments]=useLocalStorage("showAssignedAssignments",false)
+  const [showUnAssignedAssignments, setShowUnAssignedAssignments]=useLocalStorage("showUnAssignedAssignments",false)
+  const [createUserOpenModel,onsetCreateUserOpenModel]=useLocalStorage("createUserOpenModel",false)
+
+   
+
+
+   const handleShowingAssignedAssignments=()=>{
+        setShowAssignedAssignments(true)
+        setShowUnAssignedAssignments(false)
+   }
+   const handleShowingUnAssignedAssignments=()=>{
+        setShowUnAssignedAssignments(true)
+        setShowAssignedAssignments(false)
+   }
     
   return (
-    <div className=" w-full h-full">
-        <div className="w-[90%] mx-auto">
-            <div>
+    <div className=" w-full h-full bg-[#f5f5f5]">
+        {/* <div className="w-[25%] ml-auto">
+          <h1 className="">Hello there</h1>
+        </div> */}
+
+        <div className="w-[75%] mx-auto">
+
+          <div className="sticky top-0 bg-[#f5f5f5] z-10 ]">
+            <AdminTitleManager title="Work Order Management" />
+          </div>
+                               
+          <div className="mb-[1rem] flex justify-between">
+            <ul className="flex ">
+              <li onClick={handleShowingAssignedAssignments} className="underline text-lg text-textLinks hover:no-underline hover:text-blue-500 transition-all duration-200 mr-5 cursor-pointer">Assigned assignments</li>
+              <li onClick={handleShowingUnAssignedAssignments} className="underline text-lg text-textLinks hover:no-underline hover:text-blue-500 cursor-pointer">Unassigned assignments</li>  
+            </ul>
+            <button onClick={()=>""} className="flex items-center bg-blue-800 ml-5 hover:bg-blue-900 transition-colors duration-300 py-2 px-5 font-prompt text-[1.1rem] rounded-lg text-white"><span className="text-[1.3rem] mr-2"><AiOutlinePlus /></span>Add assignment</button>
+          </div>
+
+          <section className="w-full pl-1">
+              <div>
+                  {
+                      showAssignedAssignments&& showAssignedAssignments? <AssignedAssignments createUserOpenModel={createUserOpenModel} />:""
+                  }
+                  {
+                      showUnAssignedAssignments&& <UnAssignedAssignments createUserOpenModel={createUserOpenModel}/>
+                  }
+              </div>
+
+          </section>
+            {/* <div>
             <AdminTitleManager title="Work Order Management" />
             </div>
 
@@ -53,7 +102,7 @@ const WorkOrderManagement = () => {
 
 {/* Modal start */}
 
-          <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open3} onClose={handleClose3} closeaftertransitionslots={{ backdrop: Backdrop }} slotProps={{ backdrop: { timeout: 500, },}} >
+          {/* <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open3} onClose={handleClose3} closeaftertransitionslots={{ backdrop: Backdrop }} slotProps={{ backdrop: { timeout: 500, },}} >
         <Fade in={open3}>
           <Box className="absolute top-[50%] rounded-lg left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary w-[50rem]">
             <Typography  id="transition-modal-title" variant="h6" component="h2" className=''>
@@ -61,7 +110,7 @@ const WorkOrderManagement = () => {
             </Typography>
           </Box>
         </Fade>
-      </Modal>
+      </Modal> */}
 
 
 {/* Modal end */}
@@ -70,7 +119,7 @@ const WorkOrderManagement = () => {
                
                 
                 
-            </div>
+            {/* </div>
             <p className="text-[1.2rem] text-black font-opensans mb-7">{TASKS_COUNT} tasks</p>
 
             <table className="w-full border-1">
@@ -82,7 +131,7 @@ const WorkOrderManagement = () => {
                     })
                   }                    
                 </tbody>          
-            </table>
+            </table> */}
             
         </div>
 

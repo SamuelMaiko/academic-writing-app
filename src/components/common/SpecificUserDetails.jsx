@@ -14,6 +14,7 @@ import DiscardChangesModal from './DiscardChangesModal'
 import DeleteAccountModal from './DeleteAccountModal'
 import DeactivateAccountModal from './DeactivateAccountModal'
 import EditAdminRightsModal from './EditAdminRightsModal'
+import useLocalStorage from '../../customHooks/useLocalStorage'
 
 
 
@@ -21,8 +22,8 @@ const SpecificUserDetails = () => {
   const [deleteModalOpen, onsetDeleteModalOpen] = useState(false)
   const [deactivateModalOpen, onsetDeactivateModalOpen] = useState(false)
   const [discardModalOpen, onsetDiscardModalOpen] = useState(false)
-  const [rightsModalOpen,onsetRightsModalOpen]=useState(false)
-  const [isEditing, setIsEditing] = useState(false)
+  const [rightsModalOpen,onsetRightsModalOpen]=useLocalStorage("rightsModalOpen",false)
+  const [isEditing, setIsEditing] = useLocalStorage("isEditing",false)
   const {BASE_URL,specificUser,setSpecificUser,saveChangesAndPatch}=useMyBaseAPIContext()
   const [adminRights, setAdminRights]=useState([])
   const [userProfile, setUserProfile]=useState({})
@@ -128,7 +129,7 @@ const handleOnClickEditBtn=()=>{
             <div className='relative pl-2 mb-5'>
               <h1 className='text-[2.5rem] font-medium'>User Information</h1>
               <p className='text-md'>User information is shown below. To edit click on the Edit Information button.</p>
-              <button className="absolute -bottom-14 px-5 py-2 bg-blue-800 hover:bg-blue-900 text-white flex items-center"><span className="mr-2"><MdOutlineArrowBack /></span><NavLink to="/dashboard/usermanagement">Go Back</NavLink></button>
+              <NavLink to="/dashboard/usermanagement"><button className="absolute -bottom-14 px-5 py-2 bg-blue-800 hover:bg-blue-900 text-white flex items-center"><span className="mr-2"><MdOutlineArrowBack /></span>Go Back</button></NavLink>
             </div>
 
             <p className={`${isEditing?"opacity-1 visible":"invisible opacity-0"} transition-all duration-300 text-xl text-[#000000] bg-yellow-300 py-1 px-4 font-medium`}>Edit mode</p>

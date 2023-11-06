@@ -8,6 +8,15 @@ const DashboardCard = ({title, description,link}) => {
 
     const GoToRequestedAdminPage=(e)=>{
         e.preventDefault()
+        if (title==="User Management Center"){
+            localStorage.setItem("showAdmins",JSON.stringify(true));
+        }
+        if (title==="Work Order Management"){
+            localStorage.setItem("showAssignedAssignments",JSON.stringify(true));
+        }
+        localStorage.setItem("showWriters",JSON.stringify(false));
+        localStorage.setItem("showUnAssignedAssignments",JSON.stringify(false));
+        // "showAssignedAssignments",false
         navigate(`${link}`)
     }
 

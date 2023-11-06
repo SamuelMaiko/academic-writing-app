@@ -18,6 +18,7 @@ import SpecificUserDetails from './components/common/SpecificUserDetails'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from "react-toastify"
 import BaseAPIContext from './context/BaseAPIContext'
+import SpecificAssignmentDetails from './components/common/SpecificAssignmentDetails'
 
 
 const App = () => {
@@ -72,6 +73,7 @@ const App = () => {
             <Route path="/dashboard-overview/admin/dashboard/assignmentstatus" element={<AssignmentStatus />} />
             <Route path="/dashboard-overview/admin/dashboard/statistics" element={<Statistics />} />
             <Route path="users/:workId" element={<SpecificUserDetails />}/>
+            <Route path="assignments/:id" element={<SpecificAssignmentDetails />}/>
             <Route path="*" element={<h1>Page Not found!</h1>} />
           </Routes>
 

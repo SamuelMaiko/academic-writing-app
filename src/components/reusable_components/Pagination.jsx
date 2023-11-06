@@ -7,7 +7,7 @@ const Pagination = ({currentPage,cardsPerPage,totalCards,onPageChange}) => {
     }
   return (
     <div>
-        <div className="mt-4">
+        <div className="mt-4"> 
             <ul className=" flex items-center justify-center">
                 {
                     pageNumbers.map((number)=>{

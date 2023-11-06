@@ -1,14 +1,17 @@
-import { useState } from "react";
 import CreateUserModal from "../CreateUserModal";
 import AdminTitleManager from '../../reusable_components/AdminTitleManager';
 import AdminAccounts from "../adminAccounts";
 import WriterAccounts from "../WriterAccounts";
 import {BsPersonFillAdd} from 'react-icons/bs'
+import useLocalStorage from "../../../customHooks/useLocalStorage";
 
 const UserManagementCenter = () => {
-   const [showAdmins, setShowAdmins]=useState(true)
-   const [showWriters, setShowWriters]=useState(false)
-   const [createUserOpenModel,onsetCreateUserOpenModel]=useState(false)
+   const [showAdmins, setShowAdmins]=useLocalStorage("showAdmins",false)
+   const [showWriters, setShowWriters]=useLocalStorage("showWriters",false)
+   const [createUserOpenModel,onsetCreateUserOpenModel]=useLocalStorage("createUserOpenModel",false)
+
+   
+
 
    const handleShowingTheAdmins=()=>{
         setShowAdmins(true)
@@ -32,13 +35,13 @@ const UserManagementCenter = () => {
                         <li onClick={handleShowingTheAdmins} className="underline text-lg text-textLinks hover:no-underline hover:text-blue-500 transition-all duration-200 mr-5 cursor-pointer">Admins</li>
                         <li onClick={handleShowingTheWriters} className="underline text-lg text-textLinks hover:no-underline hover:text-blue-500 cursor-pointer">Writers</li>  
                     </ul>
-                    <button onClick={()=>setCreateUserOpenModel(true)} className="flex items-center bg-blue-800 ml-5 hover:bg-blue-900 py-2 px-5 font-prompt text-[1.1rem] rounded-lg text-white"><span className="text-[1.3rem] mr-2"><BsPersonFillAdd /></span>Add User</button>
+                    <button onClick={()=>setCreateUserOpenModel(true)} className="flex items-center bg-blue-800 ml-5 hover:bg-blue-900 transition-colors duration-300 py-2 px-5 font-prompt text-[1.1rem] rounded-lg text-white"><span className="text-[1.3rem] mr-2"><BsPersonFillAdd /></span>Add User</button>
                 </div>
 
                 <section className="w-full">
                     <div>
                         {
-                            showAdmins&& <AdminAccounts createUserOpenModel={createUserOpenModel} />
+                            showAdmins&& showAdmins? <AdminAccounts createUserOpenModel={createUserOpenModel} />:""
                         }
                         {
                             showWriters&& <WriterAccounts createUserOpenModel={createUserOpenModel}/>

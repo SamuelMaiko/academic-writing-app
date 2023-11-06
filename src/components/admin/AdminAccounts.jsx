@@ -5,6 +5,7 @@ import {PiCrown} from 'react-icons/pi'
 import axios from "axios"
 import { useMyBaseAPIContext } from "../../context/BaseAPIContext"
 import Pagination from "../reusable_components/Pagination"
+import useLocalStorage from "../../customHooks/useLocalStorage"
 
 const AdminAccounts = ({createUserOpenModel}) => {
     const {BASE_URL}=useMyBaseAPIContext() 
@@ -15,9 +16,9 @@ const AdminAccounts = ({createUserOpenModel}) => {
         .then(response=>{
             setAdmins(response.data)
         })
-    },[createUserOpenModel])
+    },[createUserOpenModel,BASE_URL])
     
-    const [currentPage, setCurrentPage]=useState(1)
+    const [currentPage, setCurrentPage]=useLocalStorage("adminCurrentPage",1)
     
     const cardsPerPage=6
     const indexOfFirstCard=currentPage*cardsPerPage-cardsPerPage

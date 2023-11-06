@@ -30,10 +30,16 @@ const Login = () => {
         axios.post(`${BASE_URL}/login`,LOGIN_DETAILS,{headers})
         .then(response=>{
             // setTOKEN(response.data.access_token)
-            localStorage.setItem("TOKEN",response.data.access_token)
+            // localStorage.setItem("TOKEN",response.data.access_token)
             
-            console.log(response.data)
+            // console.log(response.data)
             toast.success('Welcome back! You have successfully logged in.')
+            // LOGGEDIN_USER.current={
+            //     username:response.data.username,
+            //     role:response.data.role,
+            //     work_id:response.data.role.work_id
+            // }
+
             navigate('/dashboard-overview')
         })
         // axios.get('http://localhost:8001/users')

@@ -5,6 +5,7 @@ import {BsVectorPen} from 'react-icons/bs'
 import axios from "axios"
 import { useMyBaseAPIContext } from "../../context/BaseAPIContext"
 import Pagination from "../reusable_components/Pagination"
+import useLocalStorage from "../../customHooks/useLocalStorage"
 
 const WriterAccounts = ({createUserOpenModel}) => {
     const {BASE_URL}=useMyBaseAPIContext()
@@ -15,9 +16,9 @@ const WriterAccounts = ({createUserOpenModel}) => {
         .then(response=>{
             setWriters(response.data)
         })
-    },[createUserOpenModel])
+    },[createUserOpenModel,BASE_URL])
 
-    const [currentPage, setCurrentPage]=useState(1)
+    const [currentPage, setCurrentPage]=useLocalStorage("writerCurrentPage",1)
     
     const cardsPerPage=6
     const indexOfFirstCard=currentPage*cardsPerPage-cardsPerPage
